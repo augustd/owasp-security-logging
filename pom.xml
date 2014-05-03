@@ -8,6 +8,15 @@
   		<groupId>org.slf4j</groupId>
   		<artifactId>slf4j-api</artifactId>
   	</dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	</dependency>
   </dependencies>
   <dependencyManagement>
   	<dependencies>
@@ -16,6 +25,17 @@
   			<artifactId>slf4j-api</artifactId>
   			<version>1.7.7</version>
   		</dependency>
-  	</dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+   	</dependencies>
   </dependencyManagement>
 </project>
