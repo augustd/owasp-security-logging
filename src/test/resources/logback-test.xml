@@ -21,8 +21,15 @@
      </layout>
  </appender>
 
+<appender name="LAYOUT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="org.owasp.security.logging.layout.SecurityLoggingLayout" />
+    </encoder>
+ </appender>
+
   <root level="debug">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="MARKER_CONSOLE" />
+    <appender-ref ref="LAYOUT_CONSOLE" />
   </root>
 </configuration>    
