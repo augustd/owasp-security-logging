@@ -5,16 +5,14 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.classic.turbo.MarkerFilter;
+import ch.qos.logback.core.filter.AbstractMatcherFilter;
 import ch.qos.logback.core.spi.FilterReply;
 
-public class SecurityMarkerFilter extends MarkerFilter {
-
-	// public class MarkerFilter extends AbstractMatcherFilter {
+public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
 	public SecurityMarkerFilter() {
-		setName(SecurityMarkers.SECURITY_MARKER_NAME);
 		markerToMatch = SecurityMarkers.SECURITY_MARKER;
+		setName(SecurityMarkers.SECURITY_MARKER_NAME);
 	}
 
 	Marker markerToMatch;

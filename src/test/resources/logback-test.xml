@@ -7,7 +7,7 @@
     </layout>
   </appender>
    
-<appender name="MARKER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+<appender name="MARKER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender" additivity="false">
      <filter class="org.owasp.security.logging.filter.SecurityMarkerFilter">
          <marker>SECURITY</marker>
          <onMatch>ACCEPT</onMatch>
