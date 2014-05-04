@@ -10,6 +10,9 @@
  <conversionRule conversionWord="nanos" 
                   converterClass="org.owasp.security.logging.mask.MaskingConverter" />
  
+ <conversionRule conversionWord="remoteIP" 
+                  converterClass="ch.qos.logback.access.pattern .RemoteIPAddressConverter" />
+ 
    
 <appender name="MARKER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
      <filter class="org.owasp.security.logging.filter.MarkerFilter">
@@ -17,10 +20,24 @@
          <onMatch>ACCEPT</onMatch>
          <onMismatch>DENY</onMismatch>
         </filter>
-     <layout class="ch.qos.logback.classic.PatternLayout">
-         <Pattern>%date [%thread] [%marker] %-5level U:%X{userId} - %message%n</Pattern>
-     </layout>
+     <encoder>
+         <pattern>%date [%thread] [%marker] %-5level U:%X{userId} - %message%n</pattern>
+     </encoder>
 </appender>
+
+<appender name="ACCESS_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+     <filter class="org.owasp.security.logging.filter.MarkerFilter">
+         <marker>SECURITY</marker>
+         <onMatch>ACCEPT</onMatch>
+         <onMismatch>DENY</onMismatch>
+        </filter>
+     <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+     	<layout class="ch.qos.logback.access.PatternLayout">
+	         <pattern>%h %l %u [%t] %r %s %b %i{Referer} %i{User-Agent}</pattern>
+         </layout>
+     </encoder>
+</appender>
+
 
 <appender name="LAYOUT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 	<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -28,14 +45,19 @@
     </encoder>
  </appender>
 
- <appender name="STDOUT2" class="ch.qos.logback.core.ConsoleAppender">
-	<encoder>
-      <pattern>[%thread] %highlight(%-5level) %cyan(%logger{15}) - %msg %n</pattern>
-    </encoder>
+ <appender name="ACCESS" class="ch.qos.logback.core.FileAppender">
+      <File>byUser/access.log</File>
+     <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.access.PatternLayout">
+        <Pattern>%h %l %u %t %r %s %b</Pattern>
+      </layout>
+      </encoder>
   </appender>
 
- 
   <root level="debug">
     <appender-ref ref="MARKER_CONSOLE" />
-  </root>
+    <appender-ref ref="ACCESS_CONSOLE" />
+    <appender-ref ref="LAYOUT_CONSOLE" />
+    <appender-ref ref="ACCESS" />
+   </root>
 </configuration>    
