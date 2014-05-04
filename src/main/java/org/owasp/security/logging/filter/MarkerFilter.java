@@ -1,6 +1,5 @@
 package org.owasp.security.logging.filter;
 
-import org.owasp.security.logging.SecurityMarkers;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
@@ -8,12 +7,12 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.AbstractMatcherFilter;
 import ch.qos.logback.core.spi.FilterReply;
 
-public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
-
-	public SecurityMarkerFilter() {
-		markerToMatch = SecurityMarkers.SECURITY_MARKER;
-		setName(SecurityMarkers.SECURITY_MARKER_NAME);
-	}
+/**
+ * 
+ * Filters all logging for a specific marker
+ * 
+ */
+public class MarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
 	Marker markerToMatch;
 

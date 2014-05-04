@@ -9,7 +9,7 @@ import ch.qos.logback.core.LayoutBase;
 public class SecurityLoggingLayout extends LayoutBase<ILoggingEvent> {
 
 	private static final Object LINE_SEP = System.getProperty("line.separator");
-	private String prefix = "";
+	private String prefix = "layout";
 	private boolean printThreadName = true;
 
 	public String doLayout(ILoggingEvent event) {

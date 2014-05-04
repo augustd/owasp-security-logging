@@ -12,13 +12,13 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.spi.FilterReply;
 
-public class SecurityMarkerFilterTest {
+public class MarkerFilterTest {
 
 	@Test
 	public void testDecideILoggingEvent() {
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 		// lc.start();
-		SecurityMarkerFilter mkt = new SecurityMarkerFilter();
+		MarkerFilter mkt = new MarkerFilter();
 		mkt.setContext(lc);
 		mkt.setMarker(SecurityMarkers.SECURITY_MARKER_NAME);
 		mkt.setOnMatch(FilterReply.ACCEPT);

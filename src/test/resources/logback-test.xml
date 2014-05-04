@@ -6,20 +6,21 @@
       <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
     </layout>
   </appender>
+  
+ <conversionRule conversionWord="nanos" 
+                  converterClass="org.owasp.security.logging.mask.MaskingConverter" />
+ 
    
-<appender name="MARKER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender" additivity="false">
-     <filter class="org.owasp.security.logging.filter.SecurityMarkerFilter">
+<appender name="MARKER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+     <filter class="org.owasp.security.logging.filter.MarkerFilter">
          <marker>SECURITY</marker>
          <onMatch>ACCEPT</onMatch>
          <onMismatch>DENY</onMismatch>
-     </filter>
-     <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
-         <marker>SECURITY</marker>
-     </evaluator>
+        </filter>
      <layout class="ch.qos.logback.classic.PatternLayout">
-         <Pattern>%date [%thread] %-5level U:%X{vaspId} - %message%n</Pattern>
+         <Pattern>%date [%thread] [%marker] %-5level U:%X{userId} - %message%n</Pattern>
      </layout>
- </appender>
+</appender>
 
 <appender name="LAYOUT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 	<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -27,9 +28,14 @@
     </encoder>
  </appender>
 
+ <appender name="STDOUT2" class="ch.qos.logback.core.ConsoleAppender">
+	<encoder>
+      <pattern>[%thread] %highlight(%-5level) %cyan(%logger{15}) - %msg %n</pattern>
+    </encoder>
+  </appender>
+
+ 
   <root level="debug">
-    <appender-ref ref="STDOUT" />
     <appender-ref ref="MARKER_CONSOLE" />
-    <appender-ref ref="LAYOUT_CONSOLE" />
   </root>
 </configuration>    
