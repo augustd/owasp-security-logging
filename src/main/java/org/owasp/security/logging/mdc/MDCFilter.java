@@ -24,9 +24,11 @@ public class MDCFilter implements Filter {
 
 	private FilterConfig filterConfig;
 	private static String TZ_NAME = "timezoneOffset";
+	private String productName; 
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.filterConfig = filterConfig;
+		productName = filterConfig.getInitParameter("ProductName");
 	}
 
 	/**
@@ -70,7 +72,7 @@ public class MDCFilter implements Filter {
 			}
 		}
 		MDC.put("hostname", servletRequest.getServerName());
-		MDC.put("productName", filterConfig.getInitParameter("ProductName"));
+		if (productName != null) MDC.put("productName", productName);
 		MDC.put("locale", servletRequest.getLocale().getDisplayName());
 		if (timeZone == null) {
 			timeZone = TimeZone.getDefault();
