@@ -74,4 +74,5 @@
 		</dependency>
    	</dependencies>
   </dependencyManagement>
+    <name>OWASP Security Logging</name>
 </project>
