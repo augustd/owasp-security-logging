@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.owasp.security.logging.Utils;
 import org.slf4j.MDC;
 
@@ -22,6 +21,7 @@ public class MDCFilter implements Filter {
 
 	public static final String IPADDRESS = "ipAdress";
 	public static final String LOGIN_ID = "loginId";
+	public static final long MILLIS_PER_MINUTE = 60000L;
 
 	private FilterConfig filterConfig;
 	private static String TZ_NAME = "timezoneOffset";
@@ -64,7 +64,7 @@ public class MDCFilter implements Filter {
 							int tzOffsetMinutes = Integer.parseInt(cookie
 									.getValue());
 							timeZone = TimeZone.getTimeZone("GMT");
-							timeZone.setRawOffset((int) (tzOffsetMinutes * DateUtils.MILLIS_PER_MINUTE));
+							timeZone.setRawOffset((int) (tzOffsetMinutes * MILLIS_PER_MINUTE));
 							request.getSession().setAttribute(TZ_NAME,
 									tzOffsetMinutes);
 							cookie.setMaxAge(0);
