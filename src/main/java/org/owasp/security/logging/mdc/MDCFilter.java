@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.owasp.security.logging.Utils;
 import org.slf4j.MDC;
 
 public class MDCFilter implements Filter {
@@ -47,6 +48,8 @@ public class MDCFilter implements Filter {
 		HttpSession session = request.getSession(false);
 		TimeZone timeZone = null;
 		if (session != null) {
+			//capture (a hash of) the session ID
+			MDC.put("session", Utils.toSHA1(session.getId()));
 			// Something should set this after authentication completes
 			String loginId = (String) session.getAttribute("LoginId");
 			if (loginId != null) {
