@@ -13,9 +13,9 @@ public class SecurityLoggingLayout extends LayoutBase<ILoggingEvent> {
 	private boolean printThreadName = true;
 
 	public String doLayout(ILoggingEvent event) {
-		StringBuffer sbuf = new StringBuffer(128);
+		StringBuilder sbuf = new StringBuilder(128);
 		if (prefix != null) {
-			sbuf.append(prefix + ": ");
+			sbuf.append(prefix).append(": ");
 		}
 		sbuf.append(event.getTimeStamp()
 				- event.getLoggerContextVO().getBirthTime());
