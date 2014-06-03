@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/javabeanz/owasp-security-logging.svg?branch=master)](https://travis-ci.org/javabeanz/owasp-security-logging)
+
 owasp-security-logging
 ======================
 
