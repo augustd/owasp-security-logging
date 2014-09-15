@@ -20,7 +20,5 @@ public class SecurityMarkersTest {
 		String userid = "myId";
 		String password = "password";
 		LOGGER.info(confidential, "userid={}, password='{}'", userid, password);
-		// LOGGER.info(SecurityMarkers.SECURITY_MARKER,
-		// "userid={}, password='{}'", userid, password);
 	}
 }
