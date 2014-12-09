@@ -3,3 +3,19 @@ language: java
 jdk:
   - oraclejdk7
   - openjdk7
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "MgtArzPv9aJsLweGZoXURV3578v8Upn0nbwhH4/hA5Op1Fz8ljqHKh6UeNrNU0aOLOKsxRIhfTrB4Gy0rbe14JwhHSDC04yXg+Tyz90OUsOkDXq/YymoebF/bygwTTliEvVry11GaccK9ls10UF0GoUw0lcRjOEw79BpNMSvG2Y="
+
+addons:
+  coverity_scan:
+    project:
+      name: "javabeanz/owasp-security-logging"
+      description: "OWASP Java Security Logging API"
+    notification_email: java.development@gmail.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn install"
+    branch_pattern: coverity_scan
