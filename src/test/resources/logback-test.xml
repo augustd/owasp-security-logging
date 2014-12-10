@@ -12,7 +12,7 @@
 		converterClass="org.owasp.security.logging.mask.MaskingConverter" />
 
 	<conversionRule conversionWord="remoteIP"
-		converterClass="ch.qos.logback.access.pattern .RemoteIPAddressConverter" />
+		converterClass="ch.qos.logback.access.pattern.RemoteIPAddressConverter" />
 
 
 	<appender name="MARKER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
