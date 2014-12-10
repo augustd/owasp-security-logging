@@ -26,6 +26,8 @@ public class SecurityLoggingLayout extends LayoutBase<ILoggingEvent> {
 		sbuf.append(" ");
 		sbuf.append(event.getLevel());
 		sbuf.append(" ");
+                sbuf.append(event.getMarker());
+                sbuf.append(" ");
 		sbuf.append(event.getLoggerName());
 		sbuf.append(" - ");
 		sbuf.append(MDC.get(MDCFilter.LOGIN_ID));
