@@ -16,6 +16,7 @@ public class MarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
 	Marker markerToMatch;
 
+        @Override
 	public void start() {
 		if (this.markerToMatch != null) {
 			super.start();
