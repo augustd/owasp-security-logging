@@ -16,7 +16,7 @@ public class Utils {
 
 	public static String toSHA1(byte[] convertme) {
 		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			return byteArray2Hex(md.digest(convertme));
 		} catch (NoSuchAlgorithmException nsae) {
 			// this code should never be reached!
