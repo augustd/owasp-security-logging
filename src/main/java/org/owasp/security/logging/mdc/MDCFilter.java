@@ -17,74 +17,88 @@ import javax.servlet.http.HttpSession;
 import org.owasp.security.logging.Utils;
 import org.slf4j.MDC;
 
+/**
+ * J2EE filter to add request information to the logging context. 
+ */
 public class MDCFilter implements Filter {
 
-	public static final String IPADDRESS = "ipAdress";
-	public static final String LOGIN_ID = "loginId";
-	public static final long MILLIS_PER_MINUTE = 60000L;
+    public static final String IPADDRESS = "ipAdress";
+    public static final String LOGIN_ID = "loginId";
+    public static final long MILLIS_PER_MINUTE = 60000L;
 
-	private FilterConfig filterConfig;
-	private static String TZ_NAME = "timezoneOffset";
-	private String productName; 
+    private FilterConfig filterConfig;
+    private static String TZ_NAME = "timezoneOffset";
+    private String productName;
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		this.filterConfig = filterConfig;
-		productName = filterConfig.getInitParameter("ProductName");
-	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+        this.filterConfig = filterConfig;
+        productName = filterConfig.getInitParameter("ProductName");
+    }
 
-	/**
-	 * Sample filter that populates the MDC on every request.
-	 */
-	public void doFilter(ServletRequest servletRequest,
-			ServletResponse servletResponse, FilterChain filterChain)
-			throws IOException, ServletException {
-		HttpServletRequest request = (HttpServletRequest) servletRequest;
-		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
-		if (ipAddress == null) {
-			ipAddress = request.getRemoteAddr();
-		}
-		MDC.put("ipAddress", ipAddress);
-		HttpSession session = request.getSession(false);
-		TimeZone timeZone = null;
-		if (session != null) {
-			//capture (a hash of) the session ID
-			MDC.put("session", Utils.toSHA1(session.getId()));
-			// Something should set this after authentication completes
-			String loginId = (String) session.getAttribute("LoginId");
-			if (loginId != null) {
-				MDC.put("loginId", loginId);
-			}
-			// This assumes there is some javascript on the user's page to
-			// create the cookie.
-			if (session.getAttribute(TZ_NAME) == null) {
-				if (request.getCookies() != null) {
-					for (Cookie cookie : request.getCookies()) {
-						if (TZ_NAME.equals(cookie.getName())) {
-							int tzOffsetMinutes = Integer.parseInt(cookie
-									.getValue());
-							timeZone = TimeZone.getTimeZone("GMT");
-							timeZone.setRawOffset((int) (tzOffsetMinutes * MILLIS_PER_MINUTE));
-							request.getSession().setAttribute(TZ_NAME,
-									tzOffsetMinutes);
-							cookie.setMaxAge(0);
-							response.addCookie(cookie);
-						}
-					}
-				}
-			}
-		}
-		MDC.put("hostname", servletRequest.getServerName());
-		if (productName != null) MDC.put("productName", productName);
-		MDC.put("locale", servletRequest.getLocale().getDisplayName());
-		if (timeZone == null) {
-			timeZone = TimeZone.getDefault();
-		}
-		MDC.put("timezone", timeZone.getDisplayName());
-		filterChain.doFilter(servletRequest, servletResponse);
-		MDC.clear();
-	}
+    /**
+     * Sample filter that populates the MDC on every request.
+     */
+    public void doFilter(ServletRequest servletRequest,
+            ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        MDC.put("ipAddress", ipAddress);
+        
+        HttpSession session = request.getSession(false);
+        TimeZone timeZone = null;
+        if (session != null) {
+            //capture (a hash of) the session ID
+            MDC.put("session", Utils.toSHA(session.getId()));
+            
+            // Something should set this after authentication completes
+            String loginId = (String) session.getAttribute("LoginId");
+            if (loginId != null) {
+                MDC.put("loginId", loginId);
+            }
+            
+            // This assumes there is some javascript on the user's page to
+            // create the cookie.
+            if (session.getAttribute(TZ_NAME) == null) {
+                if (request.getCookies() != null) {
+                    for (Cookie cookie : request.getCookies()) {
+                        if (TZ_NAME.equals(cookie.getName())) {
+                            int tzOffsetMinutes = Integer.parseInt(cookie
+                                    .getValue());
+                            timeZone = TimeZone.getTimeZone("GMT");
+                            timeZone.setRawOffset((int) (tzOffsetMinutes * MILLIS_PER_MINUTE));
+                            request.getSession().setAttribute(TZ_NAME,
+                                    tzOffsetMinutes);
+                            cookie.setMaxAge(0);
+                            response.addCookie(cookie);
+                        }
+                    }
+                }
+            }
+        }
+        
+        MDC.put("hostname", servletRequest.getServerName());
+        
+        if (productName != null) {
+            MDC.put("productName", productName);
+        }
+        
+        MDC.put("locale", servletRequest.getLocale().getDisplayName());
+        
+        if (timeZone == null) {
+            timeZone = TimeZone.getDefault();
+        }
+        MDC.put("timezone", timeZone.getDisplayName());
+        
+        filterChain.doFilter(servletRequest, servletResponse);
+        MDC.clear();
+    }
 
-	public void destroy() {
-	}
+    public void destroy() {
+    }
 }
