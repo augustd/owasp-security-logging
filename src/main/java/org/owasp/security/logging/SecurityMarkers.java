@@ -24,31 +24,37 @@ public class SecurityMarkers {
 	public static final String EVENT_FAILURE_MARKER_NAME = "EVENT FAILURE";
 	public static final String EVENT_UNSPECIFIED_MARKER_NAME = "EVENT UNSPECIFIED";
 
-	public static Marker SECURITY_MARKER = MarkerFactory
-			.getMarker(SECURITY_MARKER_NAME);
+        //information classification
+	public static final Marker RESTRICTED = MarkerFactory
+			.getDetachedMarker(RESTRICTED_MARKER_NAME);
 
-	public static Marker RESTRICTED_MARKER = MarkerFactory
-			.getMarker(RESTRICTED_MARKER_NAME);
+	public static final Marker CONFIDENTIAL = MarkerFactory
+			.getDetachedMarker(CONFIDENTIAL_MARKER_NAME);
 
-	public static Marker CONFIDENTIAL_MARKER = MarkerFactory
-			.getMarker(CONFIDENTIAL_MARKER_NAME);
+	public static final Marker SECRET = MarkerFactory
+			.getDetachedMarker(SECRET_MARKER_NAME);
 
-	public static Marker SECRET_MARKER = MarkerFactory
-			.getMarker(SECRET_MARKER_NAME);
+	public static final Marker TOP_SECRET = MarkerFactory
+			.getDetachedMarker(TOP_SECRET_MARKER_NAME);
 
-	public static Marker TOP_SECRET_MARKER = MarkerFactory
-			.getMarker(TOP_SECRET_MARKER_NAME);
+        //security events
+	public static final Marker SECURITY_SUCCESS = MarkerFactory.getDetachedMarker(SECURITY_SUCCESS_MARKER_NAME);
 
-	public static Marker SECURITY_SUCCESS = MarkerFactory.getMarker(SECURITY_SUCCESS_MARKER_NAME);
+	public static final Marker SECURITY_FAILURE = MarkerFactory.getDetachedMarker(SECURITY_FAILURE_MARKER_NAME);
 
-	public static Marker SECURITY_FAILURE = MarkerFactory.getMarker(SECURITY_FAILURE_MARKER_NAME);
+	public static final Marker SECURITY_AUDIT = MarkerFactory.getDetachedMarker(SECURITY_AUDIT_MARKER_NAME);
 
-	public static Marker SECURITY_AUDIT = MarkerFactory.getMarker(SECURITY_AUDIT_MARKER_NAME);
+        //non-security events
+	public static final Marker EVENT_SUCCESS = MarkerFactory.getDetachedMarker(EVENT_SUCCESS_MARKER_NAME);
 
-	public static Marker EVENT_SUCCESS = MarkerFactory.getMarker(EVENT_SUCCESS_MARKER_NAME);
-
-	public static Marker EVENT_FAILURE = MarkerFactory.getMarker(EVENT_FAILURE_MARKER_NAME);
-
-	public static Marker EVENT_UNSPECIFIED = MarkerFactory.getMarker(EVENT_UNSPECIFIED_MARKER_NAME);
+	public static final Marker EVENT_FAILURE = MarkerFactory.getDetachedMarker(EVENT_FAILURE_MARKER_NAME);
 	
+        public static Marker getMarker(Marker... markers) {
+            Marker output = MarkerFactory.getMarker(""); //markerNames[0]);
+            output.remove(output);
+            for (Marker marker : markers) {
+                output.add(marker);
+            }
+            return output;
+        }
 }

@@ -31,7 +31,7 @@ public class MarkerFilterTest {
 		// assertEquals(FilterReply.ACCEPT,
 		// mkt.decide(SECURITY_MARKER, null, null, null, null, null));
 		Logger LOGGER = lc.getLogger(MarkerFilterTest.class);
-		LOGGER.debug(SecurityMarkers.TOP_SECRET_MARKER, "This is so right !");
-		LOGGER.debug(SecurityMarkers.CONFIDENTIAL_MARKER, "Look at this !");
+		LOGGER.debug(SecurityMarkers.TOP_SECRET, "This is so right !");
+		LOGGER.debug(SecurityMarkers.CONFIDENTIAL, "Look at this !");
 	}
 }
