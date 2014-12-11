@@ -15,7 +15,7 @@ public class SecurityMarkers {
 	public static final String CONFIDENTIAL_MARKER_NAME = "CONFIDENTIAL";
 	public static final String SECRET_MARKER_NAME = "SECRET";
 	public static final String TOP_SECRET_MARKER_NAME = "TOPSECRET";
-	
+
 	public static final String SECURITY_SUCCESS_MARKER_NAME = "SECURITY SUCCESS";
 	public static final String SECURITY_FAILURE_MARKER_NAME = "SECURITY FAILURE";
 	public static final String SECURITY_AUDIT_MARKER_NAME = "SECURITY AUDIT";
@@ -50,7 +50,7 @@ public class SecurityMarkers {
 	public static final Marker EVENT_FAILURE = MarkerFactory.getDetachedMarker(EVENT_FAILURE_MARKER_NAME);
 	
         public static Marker getMarker(Marker... markers) {
-            Marker output = MarkerFactory.getMarker(""); //markerNames[0]);
+            Marker output = MarkerFactory.getMarker(""); 
             output.remove(output);
             for (Marker marker : markers) {
                 output.add(marker);

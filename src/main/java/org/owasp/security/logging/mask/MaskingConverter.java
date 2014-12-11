@@ -14,7 +14,6 @@ public class MaskingConverter extends
 
 	@Override
 	protected String transform(ILoggingEvent event, String in) {
-		System.out.println("converting ..." + in);
 		if (SecurityMarkers.CONFIDENTIAL.equals(event.getMarker())) {
 			return event.getArgumentArray()[0].toString().replaceAll(".", "*");
 		}
