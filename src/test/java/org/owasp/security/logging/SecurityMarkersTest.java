@@ -34,25 +34,41 @@ public class SecurityMarkersTest {
 
     @Before
     public void setup() {
-        final Logger LOGGER = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         LOGGER.addAppender(mockAppender);
     }
 
     @After
     public void teardown() {
-        final Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        logger.detachAppender(mockAppender);
+        LOGGER.detachAppender(mockAppender);
     }
 
     @Test
     public void test() {
         LOGGER.info(SecurityMarkers.SECURITY_SUCCESS, "some security event");
         LOGGER.info("some other event");
+    }
+    
+    @Test
+    public void confidentialTest() {
         Marker confidential = MarkerFactory.getMarker("CONFIDENTIAL");
         confidential.add(SecurityMarkers.SECURITY_AUDIT);
         String userid = "myId";
         String password = "password";
         LOGGER.info(confidential, "userid={}, password='{}'", userid, password);
+        
+        //Now verify our logging interactions
+        verify(mockAppender).doAppend(captorLoggingEvent.capture());
+        
+        //Get the logging event from the captor
+        final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+        
+        //Check log level is correct
+        assertThat(loggingEvent.getLevel(), is(Level.INFO));
+
+        //check that markers are proper
+        Marker test = loggingEvent.getMarker();
+        assertTrue(test.contains(SecurityMarkers.SECURITY_AUDIT));
+        assertTrue(test.contains(SecurityMarkers.CONFIDENTIAL));
     }
 
     @Test
@@ -63,7 +79,7 @@ public class SecurityMarkersTest {
         //Now verify our logging interactions
         verify(mockAppender).doAppend(captorLoggingEvent.capture());
 
-        //Having a genricised captor means we don't need to cast
+        //Get the logging event from the captor
         final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
 
         //Check log level is correct
