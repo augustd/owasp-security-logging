@@ -20,7 +20,7 @@
     <appender name="APP_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--<filter class="org.owasp.security.logging.filter.ExcludeClassifiedMarkerFilter"/>-->
         <encoder>
-            <pattern>APP %mask %date [%thread] [%marker] %-5level U:%X{userId} - %message%n</pattern>
+            <pattern>APP %date [%thread] [%marker] %-5level U:%X{userId} - %mask%n</pattern>
         </encoder>
     </appender>
 
@@ -41,15 +41,10 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>CONFIDENTIAL%mask %date [%thread] [%marker] %-5level U:%X{userId} - %message%n</pattern>
+            <pattern>CONFIDENTIAL %date [%thread] [%marker] %-5level U:%X{userId} - %msg%n</pattern>
         </encoder>
     </appender>
-    <!--
-    <logger name="org.owasp.security.logging.filter" level="DEBUG">
-        <appender-ref ref="CONFIDENTIAL_CONSOLE" />
-    </logger>/>
-    -->
-
+    
     <root level="INFO">
         <appender-ref ref="APP_CONSOLE" />
         <appender-ref ref="SECURITY_CONSOLE" />

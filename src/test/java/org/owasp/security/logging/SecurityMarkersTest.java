@@ -1,11 +1,14 @@
 package org.owasp.security.logging;
 
+import ch.qos.logback.access.PatternLayoutEncoder;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.classic.Level;
 import org.junit.Test;
 import org.mockito.Mock;
 import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.core.rolling.RollingFileAppender;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import static org.junit.Assert.assertThat;
