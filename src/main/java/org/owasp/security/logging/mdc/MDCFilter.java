@@ -1,7 +1,9 @@
 package org.owasp.security.logging.mdc;
 
 import java.io.IOException;
-import java.util.TimeZone;
+import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,30 +11,60 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.owasp.security.logging.Utils;
 import org.slf4j.MDC;
 
 /**
- * J2EE filter to add request information to the logging context. 
+ * J2EE filter to add request information to the logging context. Adding data to
+ * the MDC is accomplished through implementations of the IPlugin interface. 
+ * 
+ * This filter adds the following information to the MDC: 
+ * 
+ * <li>%X{ipAddress} - The remote IP address of the request (using IPAddressPlugin)
+ * <li>%X{session} - A hash of the J2EE session ID (using SessionPlugin)
+ * <li>%X{productName} - A product name identifier (specified in web.xml)
+ * <li>%X{hostname} - The server hostname (from HttpServletRequest)
+ * <li>%X{locale} - The preferred Locale of the client (from HttpServletRequest.getLocale())
+ * 
+ * @author August Detlefsen <augustd@codemagi.com>
+ * @see IPlugin
  */
 public class MDCFilter implements Filter {
 
-    public static final String IPADDRESS = "ipAdress";
-    public static final String LOGIN_ID = "loginId";
-    public static final long MILLIS_PER_MINUTE = 60000L;
+    public static final String IPADDRESS = "ipAddress";
+    public static final String LOGIN_ID = "username";
 
     private FilterConfig filterConfig;
-    private static String TZ_NAME = "timezoneOffset";
     private String productName;
+    
+    private static final Map<String,IPlugin> plugins = new LinkedHashMap();
+    static {
+        //set some defaults 
+        plugins.put("ipAddress", new IPAddressPlugin());
+        plugins.put("session", new SessionPlugin());
+    }
 
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
-        productName = filterConfig.getInitParameter("ProductName");
+        
+        //process plugins in filter config
+        Enumeration e = filterConfig.getInitParameterNames();
+        while (e.hasMoreElements()) {
+            String pluginName = (String)e.nextElement();
+            if ("ProductName".equals(pluginName)) {
+                productName = filterConfig.getInitParameter("ProductName");
+            } else {
+                //this is a plugin 
+                try {
+                    IPlugin plugin = (IPlugin)Class.forName(filterConfig.getInitParameter(pluginName)).newInstance();
+                    plugins.put(pluginName, plugin);
+                } catch (Exception cnfe) {
+                    //ClassNotFoundException, InstantiationException, IllegalAccessException
+                    cnfe.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
@@ -44,44 +76,7 @@ public class MDCFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         
-        String ipAddress = request.getHeader("X-FORWARDED-FOR");
-        if (ipAddress == null) {
-            ipAddress = request.getRemoteAddr();
-        }
-        MDC.put("ipAddress", ipAddress);
-        
-        HttpSession session = request.getSession(false);
-        TimeZone timeZone = null;
-        if (session != null) {
-            //capture (a hash of) the session ID
-            MDC.put("session", Utils.toSHA(session.getId()));
-            
-            // Something should set this after authentication completes
-            String loginId = (String) session.getAttribute("LoginId");
-            if (loginId != null) {
-                MDC.put("loginId", loginId);
-            }
-            
-            // This assumes there is some javascript on the user's page to
-            // create the cookie.
-            if (session.getAttribute(TZ_NAME) == null) {
-                if (request.getCookies() != null) {
-                    for (Cookie cookie : request.getCookies()) {
-                        if (TZ_NAME.equals(cookie.getName())) {
-                            int tzOffsetMinutes = Integer.parseInt(cookie
-                                    .getValue());
-                            timeZone = TimeZone.getTimeZone("GMT");
-                            timeZone.setRawOffset((int) (tzOffsetMinutes * MILLIS_PER_MINUTE));
-                            request.getSession().setAttribute(TZ_NAME,
-                                    tzOffsetMinutes);
-                            cookie.setMaxAge(0);
-                            response.addCookie(cookie);
-                        }
-                    }
-                }
-            }
-        }
-        
+        //put values into MDC
         MDC.put("hostname", servletRequest.getServerName());
         
         if (productName != null) {
@@ -90,11 +85,12 @@ public class MDCFilter implements Filter {
         
         MDC.put("locale", servletRequest.getLocale().getDisplayName());
         
-        if (timeZone == null) {
-            timeZone = TimeZone.getDefault();
+        //process plugins 
+        for (IPlugin plugin : plugins.values()) {
+            plugin.execute(request);
         }
-        MDC.put("timezone", timeZone.getDisplayName());
         
+        //forward to the chain for processing
         filterChain.doFilter(servletRequest, servletResponse);
         MDC.clear();
     }
