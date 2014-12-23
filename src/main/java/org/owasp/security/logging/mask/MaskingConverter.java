@@ -8,8 +8,15 @@ import org.slf4j.Marker;
 import org.slf4j.helpers.MessageFormatter;
 
 /**
+ * This converter is used to output a masked version of the formatted message in
+ * contexts where the logging of confidential information is undesirable. 
  *
- *
+ * It is not possible to replace the actual formatted message, instead this converter
+ * returns a masked version of the message that can be accessed using the conversionWord
+ * specified in the conversionRule definition in logback.xml. 
+ * 
+ * @author August Detlefsen <augustd@codemagi.com>
+ * @author Sytze van Koningsveld 
  */
 public class MaskingConverter extends
         ReplacingCompositeConverter<ILoggingEvent> {
