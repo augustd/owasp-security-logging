@@ -1,5 +1,6 @@
 package org.owasp.security.logging.mdc;
 
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
 
@@ -16,6 +17,9 @@ import org.slf4j.MDC;
  */
 public class ForwardedIPAddressPlugin implements IPlugin {
 
+    public void init(FilterConfig config) {
+    }
+    
     public void execute(HttpServletRequest request) {
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (ipAddress == null) {
@@ -23,5 +27,5 @@ public class ForwardedIPAddressPlugin implements IPlugin {
         }
         MDC.put(MDCFilter.IPADDRESS, ipAddress);
     }
-    
+
 }

@@ -1,5 +1,6 @@
 package org.owasp.security.logging.mdc;
 
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -10,5 +11,16 @@ import javax.servlet.http.HttpServletRequest;
  * @author August Detlefsen <augustd@codemagi.com>
  */
 public interface IPlugin {
+    
+    /**
+     * Initialize the plugin and load any required resources.
+     */
+    public void init(FilterConfig config);
+    
+    /**
+     * Execute the plugin's action and place information into the diagnostic context.
+     * 
+     * @param request 
+     */
     public void execute(HttpServletRequest request);
 }

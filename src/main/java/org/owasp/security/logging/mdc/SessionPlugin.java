@@ -1,5 +1,6 @@
 package org.owasp.security.logging.mdc;
 
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.owasp.security.logging.Utils;
@@ -13,6 +14,9 @@ import org.slf4j.MDC;
  */
 public class SessionPlugin implements IPlugin {
 
+    public void init(FilterConfig config) {
+    }
+    
     public void execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session != null) {

@@ -58,6 +58,7 @@ public class MDCFilter implements Filter {
                 //this is a plugin 
                 try {
                     IPlugin plugin = (IPlugin)Class.forName(filterConfig.getInitParameter(pluginName)).newInstance();
+                    plugin.init(filterConfig);
                     plugins.put(pluginName, plugin);
                 } catch (Exception cnfe) {
                     //ClassNotFoundException, InstantiationException, IllegalAccessException
