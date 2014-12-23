@@ -53,7 +53,7 @@ public class SecurityMarkersTest {
     
     @Test
     public void confidentialTest() {
-        Marker confidential = MarkerFactory.getMarker("CONFIDENTIAL");
+        Marker confidential = SecurityMarkers.CONFIDENTIAL; 
         confidential.add(SecurityMarkers.SECURITY_AUDIT);
         String userid = "myId";
         String password = "password";
