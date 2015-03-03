@@ -9,7 +9,7 @@ import org.slf4j.MDC;
  * This is an example MDC plugin that gets a username from the HTTP session and 
  * places it in the MDC context for access by the logging system. 
  * 
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  */
 public class UsernamePlugin implements IPlugin {
 

@@ -10,7 +10,7 @@ import org.slf4j.MDC;
  * This plugin adds a hash of the session ID to the MDC. The value can 
  * be accessed in a PatternLayout by using the specifier: %X{session}
  *
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  */
 public class SessionPlugin implements IPlugin {
 

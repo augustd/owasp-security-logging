@@ -16,7 +16,7 @@ import org.owasp.security.logging.SecurityMarkers;
  *
  * This is useful to <i>exclude</i> classified information from a general log file.
  *
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  */
 public class ExcludeClassifiedMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 

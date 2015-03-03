@@ -21,13 +21,15 @@ import org.slf4j.MDC;
  * 
  * This filter adds the following information to the MDC: 
  * 
+ * <ul>
  * <li>%X{ipAddress} - The remote IP address of the request (using IPAddressPlugin)
  * <li>%X{session} - A hash of the J2EE session ID (using SessionPlugin)
  * <li>%X{productName} - A product name identifier (specified in web.xml)
  * <li>%X{hostname} - The server hostname (from HttpServletRequest)
  * <li>%X{locale} - The preferred Locale of the client (from HttpServletRequest.getLocale())
+ * </ul>
  * 
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  * @see IPlugin
  */
 public class MDCFilter implements Filter {

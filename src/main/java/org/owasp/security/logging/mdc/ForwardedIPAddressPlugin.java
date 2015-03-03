@@ -13,7 +13,7 @@ import org.slf4j.MDC;
  * recommended to not use this plugin since an attacker could easily add spoofed 
  * X-Forwarded-For headers in any request. 
  * 
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  */
 public class ForwardedIPAddressPlugin implements IPlugin {
 
