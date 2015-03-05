@@ -1,7 +1,10 @@
-package org.owasp.security.logging.mdc;
+package org.owasp.security.logging.mdc.plugins;
 
 import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
+
+import org.owasp.security.logging.mdc.IPlugin;
+import org.owasp.security.logging.mdc.MDCFilter;
 import org.slf4j.MDC;
 
 /**

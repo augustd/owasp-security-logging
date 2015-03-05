@@ -6,7 +6,6 @@ import java.util.Set;
 
 /**
  * prefix of the CEF logging format example :
- * CEF:0|Sony|laptop|5.4|null|null|0|null|Someother
  * 
  * Sep 19 08:26:10 host CEF:0|security|threatmanager|1.0|100|worm successfully
  * stopped|10|src=10.0.0.1 dst=2.1.2.2 spt=1232
@@ -75,9 +74,9 @@ public class Prefix {
 			StringBuilder builder = new StringBuilder();
 			for (Object key : keys) {
 				builder.append(key);
-				builder.append("=");
+				builder.append('=');
 				builder.append(get(key));
-				builder.append(" ");
+				builder.append(' ');
 			}
 			return builder.toString();
 		}

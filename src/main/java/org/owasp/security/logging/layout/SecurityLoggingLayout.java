@@ -5,9 +5,10 @@ import org.slf4j.MDC;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.LayoutBase;
+
 /**
  * 
- * Layout for security related logging 
+ * Layout for security related logging
  *
  */
 public class SecurityLoggingLayout extends LayoutBase<ILoggingEvent> {
@@ -23,17 +24,17 @@ public class SecurityLoggingLayout extends LayoutBase<ILoggingEvent> {
 		}
 		sbuf.append(event.getTimeStamp()
 				- event.getLoggerContextVO().getBirthTime());
-		sbuf.append(" ");
+		sbuf.append(' ');
 		sbuf.append(event.getLevel());
-		sbuf.append(" ");
-                sbuf.append(event.getMarker());
-                sbuf.append(" ");
+		sbuf.append(' ');
+		sbuf.append(event.getMarker());
+		sbuf.append(' ');
 		sbuf.append(event.getLoggerName());
 		sbuf.append(" - ");
 		sbuf.append(MDC.get(MDCFilter.LOGIN_ID));
-		sbuf.append("@");
+		sbuf.append('@');
 		sbuf.append(MDC.get(MDCFilter.IPADDRESS));
-		sbuf.append(" ");
+		sbuf.append(' ');
 		sbuf.append(event.getFormattedMessage());
 		sbuf.append(LINE_SEP);
 		return sbuf.toString();
