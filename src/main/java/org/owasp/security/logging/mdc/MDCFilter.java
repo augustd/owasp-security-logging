@@ -24,14 +24,24 @@ import org.slf4j.MDC;
  * 
  * This filter adds the following information to the MDC:
  * 
- * <li>%X{ipAddress} - The remote IP address of the request (using
+ * <<<<<<< HEAD <li>%X{ipAddress} - The remote IP address of the request (using
  * IPAddressPlugin) <li>%X{session} - A hash of the J2EE session ID (using
  * SessionPlugin) <li>%X{productName} - A product name identifier (specified in
  * web.xml) <li>%X{hostname} - The server hostname (from HttpServletRequest) <li>
  * %X{locale} - The preferred Locale of the client (from
+ * HttpServletRequest.getLocale()) =======
+ * <ul>
+ * <li>%X{ipAddress} - The remote IP address of the request (using
+ * IPAddressPlugin)
+ * <li>%X{session} - A hash of the J2EE session ID (using SessionPlugin)
+ * <li>%X{productName} - A product name identifier (specified in web.xml)
+ * <li>%X{hostname} - The server hostname (from HttpServletRequest)
+ * <li>%X{locale} - The preferred Locale of the client (from
  * HttpServletRequest.getLocale())
+ * </ul>
+ * >>>>>>> 30461f4e1a1f77a128bdb508a957cecca568fb60
  * 
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  * @see IPlugin
  */
 public class MDCFilter implements Filter {
@@ -45,7 +55,7 @@ public class MDCFilter implements Filter {
 	private FilterConfig filterConfig;
 	private String productName;
 
-	private static final Map<String, IPlugin> plugins = new LinkedHashMap();
+	private static final Map<String, IPlugin> plugins = new LinkedHashMap<String, IPlugin>();
 	static {
 		// set some defaults
 		plugins.put(IPADDRESS, new IPAddressPlugin());
@@ -56,7 +66,7 @@ public class MDCFilter implements Filter {
 		this.filterConfig = filterConfig;
 
 		// process plugins in filter config
-		Enumeration e = filterConfig.getInitParameterNames();
+		Enumeration<?> e = filterConfig.getInitParameterNames();
 		while (e.hasMoreElements()) {
 			String pluginName = (String) e.nextElement();
 			if ("ProductName".equals(pluginName)) {

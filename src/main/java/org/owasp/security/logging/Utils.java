@@ -7,7 +7,7 @@ import java.util.Formatter;
 /**
  * Utilities methods for logging.
  * 
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  */
 public class Utils {
 
@@ -16,7 +16,7 @@ public class Utils {
      * hidden by the method name to allow for future-proofing this API, but the
      * current default is SHA-256.
      *
-     * @param input
+     * @param input The string to hash
      * @return SHA hash of the input String, hex encoded.
      */
     public static String toSHA(String input) {
@@ -28,7 +28,7 @@ public class Utils {
      * hidden by the method name to allow for future-proofing this API, but the
      * current default is SHA-256.
      *
-     * @param input
+     * @param input Byte array to hash
      * @return SHA hash of the input String, hex encoded.
      */
     public static String toSHA(byte[] input) {
@@ -44,7 +44,7 @@ public class Utils {
     /**
      * Converts an input byte array to a hex encoded String.
      *
-     * @param input
+     * @param input Byte array to hex encode
      * @return Hex encoded String of the input byte array
      */
     private static String byteArray2Hex(final byte[] hash) {

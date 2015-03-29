@@ -2,7 +2,29 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.owasp</groupId>
   <artifactId>security-logging</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
+  <name>OWASP Security Logging</name>
+  <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
+  <url>https://www.owasp.org/index.php/OWASP_Security_Logging_Project</url>
+  <licenses>
+      <license>
+          <name>The Apache License, Version 2.0</name>
+          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      </license>
+  </licenses>
+  <developers>
+      <developer>
+          <name>August Detlefsen</name>
+          <email>augustd@codemagi.com</email>
+          <organization>CodeMagi, Inc.</organization>
+          <organizationUrl>http://www.codemagi.com</organizationUrl>
+      </developer>
+  </developers>
+  <scm>
+      <connection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</connection>
+      <developerConnection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</developerConnection>
+      <url>https://github.com/javabeanz/owasp-security-logging</url>
+  </scm>
   <dependencies>
   	<dependency>
   		<groupId>org.slf4j</groupId>
@@ -81,5 +103,63 @@
 		</dependency>
    	</dependencies>
   </dependencyManagement>
-    <name>OWASP Security Logging</name>
+
+  <profiles>
+      <profile> 
+          <id>release</id>
+          <build>
+              <plugins>
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-source-plugin</artifactId>
+                      <executions>
+                          <execution>
+                              <id>attach-sources</id>
+                              <goals>
+                                  <goal>jar</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                  </plugin>
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-javadoc-plugin</artifactId>
+                      <executions>
+                          <execution>
+                              <id>attach-javadocs</id>
+                              <goals>
+                                  <goal>jar</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                  </plugin>
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-gpg-plugin</artifactId>
+                      <version>1.6</version>
+                      <executions>
+                          <execution>
+                              <id>sign-artifacts</id>
+                              <phase>deploy</phase>
+                              <goals>
+                                  <goal>sign</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                  </plugin>
+                  <plugin>
+                      <groupId>org.sonatype.plugins</groupId>
+                      <artifactId>nexus-staging-maven-plugin</artifactId>
+                      <version>1.6.3</version>
+                      <extensions>true</extensions>
+                      <configuration>
+                          <serverId>ossrh</serverId>
+                          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                          <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                      </configuration>
+                  </plugin>
+              </plugins>          
+          </build>
+      </profile>
+  </profiles>
 </project>

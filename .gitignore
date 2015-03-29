@@ -9,3 +9,4 @@
 *.ear
 
 byUser/access.log
+/.metadata

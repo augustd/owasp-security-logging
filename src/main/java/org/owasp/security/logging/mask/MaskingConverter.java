@@ -15,7 +15,7 @@ import org.slf4j.helpers.MessageFormatter;
  * returns a masked version of the message that can be accessed using the conversionWord
  * specified in the conversionRule definition in logback.xml. 
  * 
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  * @author Sytze van Koningsveld 
  */
 public class MaskingConverter extends

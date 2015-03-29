@@ -15,7 +15,7 @@ import ch.qos.logback.core.spi.FilterReply;
  * marker attached to it, it will pass the filter. This is useful to route
  * security related events to a separate log file.
  *
- * @author August Detlefsen <augustd@codemagi.com>
+ * @author August Detlefsen [augustd@codemagi.com]
  */
 public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
