@@ -5,5 +5,14 @@
 owasp-security-logging
 ======================
 
-OWASP Java Security Logger to log security related events via a standard
-API.  
+[OWASP Security Logging Project](https://www.owasp.org/index.php/OWASP_Security_Logging_Project) - Standard Java API to log security related events.  [Documentation](https://github.com/javabeanz/owasp-security-logging/wiki)
+
+To use this library with Maven, add the following dependency to pom.xml: 
+
+```xml
+<dependency>
+  <groupId>org.owasp</groupId>
+  <artifactId>security-logging</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
