@@ -49,12 +49,9 @@
 		<artifactId>logback-access</artifactId>
 	</dependency>
 	<dependency>
-		<groupId>org.fusesource.jansi</groupId>
-		<artifactId>jansi</artifactId>
-	</dependency>
-	<dependency>
 		<groupId>javax.servlet</groupId>
 		<artifactId>javax.servlet-api</artifactId>
+                <scope>provided</scope>
 	</dependency>
    </dependencies>
   <dependencyManagement>
@@ -90,16 +87,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fusesource.jansi</groupId>
-			<artifactId>jansi</artifactId>
-			<version>1.11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.0</version>
+                        <scope>provided</scope>
 		</dependency>
    	</dependencies>
   </dependencyManagement>
