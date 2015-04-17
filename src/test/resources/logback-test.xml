@@ -3,10 +3,14 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            <Pattern>STDOUT %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %crlf(%msg) %n
             </Pattern>
         </layout>
     </appender>
+
+    <conversionRule conversionWord="crlf"
+                    converterClass="org.owasp.security.logging.mask.CRLFConverter">
+    </conversionRule> />
 
     <conversionRule conversionWord="mask"
                         converterClass="org.owasp.security.logging.mask.MaskingConverter" />
@@ -20,7 +24,7 @@
     <appender name="APP_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--<filter class="org.owasp.security.logging.filter.ExcludeClassifiedMarkerFilter"/>-->
         <encoder>
-            <pattern>APP %date [%thread] [%marker] %-5level U:%X{userId} - %mask%n</pattern>
+            <pattern>APP %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%mask) %n</pattern>
         </encoder>
     </appender>
 
@@ -41,7 +45,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>CONFIDENTIAL %date [%thread] [%marker] %-5level U:%X{userId} - %msg%n</pattern>
+            <pattern>CONFIDENTIAL %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%msg) %n</pattern>
         </encoder>
     </appender>
     
