@@ -16,3 +16,5 @@ To use this library with Maven, add the following dependency to pom.xml:
   <version>1.0.0</version>
 </dependency>
 ```
+
+Log4j users please see [Usage with Log4j](https://github.com/javabeanz/owasp-security-logging/wiki/Usage-with-Log4j)
