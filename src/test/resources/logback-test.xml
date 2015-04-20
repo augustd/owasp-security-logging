@@ -18,20 +18,27 @@
     <conversionRule conversionWord="remoteIP"
                         converterClass="ch.qos.logback.access.pattern.RemoteIPAddressConverter" />
 
-    <!-- This appender represents a regular application log. 
-         It should show application events and security events, 
-         but not classified events -->
+    <!-- This appender represents a regular application log. -->
     <appender name="APP_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <!--<filter class="org.owasp.security.logging.filter.ExcludeClassifiedMarkerFilter"/>-->
         <encoder>
             <pattern>APP %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%mask) %n</pattern>
         </encoder>
     </appender>
 
+    <!-- This appender is an application log that should not show classified events -->
+    <appender name="NOT_CLASSIFIED_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="org.owasp.security.logging.filter.ExcludeClassifiedMarkerFilter"/>
+        <encoder>
+            <pattern>NOT CLASSIFIED %date [%thread] [%marker] %-5level - %msg %n</pattern>
+        </encoder>
+    </appender>
+    
     <!-- This appender represents a separate application log for security.  
          It should only display security events and classified events -->
     <appender name="SECURITY_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="org.owasp.security.logging.filter.SecurityMarkerFilter"/>
+        <filter class="org.owasp.security.logging.filter.SecurityMarkerFilter">
+            <acceptAll>true</acceptAll>
+        </filter>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="org.owasp.security.logging.layout.SecurityLoggingLayout" />
         </encoder>
@@ -53,6 +60,7 @@
         <appender-ref ref="APP_CONSOLE" />
         <appender-ref ref="SECURITY_CONSOLE" />
         <appender-ref ref="CONFIDENTIAL_CONSOLE" />
+        <appender-ref ref="NOT_CLASSIFIED_CONSOLE" />
     </root>
     
 </configuration>    
