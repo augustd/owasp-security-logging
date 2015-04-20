@@ -14,7 +14,18 @@ import ch.qos.logback.core.spi.FilterReply;
  * Filters logging for SECURITY markers. If a logging event has a SECURITY
  * marker attached to it, it will pass the filter. This is useful to route
  * security related events to a separate log file.
- *
+ * 
+ * The default behavior of this filter is to deny all non-security events and 
+ * pass security events to the rest of the filter chain. If acceptAll is true, 
+ * then all security related events will pass this filter, regardless of other 
+ * filters on the filter chain. To enable acceptAll, configure the filter as follows:
+ * 
+ * <pre>
+ * <filter class="org.owasp.security.logging.filter.SecurityMarkerFilter">
+ *     <acceptAll>true</acceptAll>
+ * </filter>
+ * </pre>
+ * 
  * @author August Detlefsen [augustd@codemagi.com]
  */
 public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
@@ -25,6 +36,8 @@ public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 		markersToMatch.add(SecurityMarkers.SECURITY_FAILURE);
 		markersToMatch.add(SecurityMarkers.SECURITY_AUDIT);
 	}
+        
+        private boolean acceptAll = false;
 
 	public FilterReply decide(ILoggingEvent event) {
 		if (!isStarted()) {
@@ -41,13 +54,13 @@ public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 			// check for events with multiple markers
 			for (Marker marker : markersToMatch) {
 				if (eventMarker.contains(marker)) {
-					return FilterReply.NEUTRAL;
+					return acceptAll ? FilterReply.ACCEPT : FilterReply.NEUTRAL;
 				}
 			}
 		} else {
 			// handle simple case of an event with a single marker
 			if (markersToMatch.contains(eventMarker)) {
-				return FilterReply.NEUTRAL;
+				return acceptAll ? FilterReply.ACCEPT : FilterReply.NEUTRAL;
 			}
 		}
 
@@ -55,4 +68,9 @@ public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 		return FilterReply.DENY;
 	}
 
+        public void setAcceptAll(String input) {
+		if (input != null) {
+			acceptAll = Boolean.valueOf(input);
+		}
+	}
 }
