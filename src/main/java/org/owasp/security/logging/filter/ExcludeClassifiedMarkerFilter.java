@@ -21,44 +21,44 @@ import ch.qos.logback.core.spi.FilterReply;
  * @author August Detlefsen [augustd@codemagi.com]
  */
 public class ExcludeClassifiedMarkerFilter extends
-		AbstractMatcherFilter<ILoggingEvent> {
+        AbstractMatcherFilter<ILoggingEvent> {
 
-	public static final List<Marker> markersToMatch = new ArrayList<Marker>(4);
+    public static final List<Marker> markersToMatch = new ArrayList<Marker>(4);
 
-	static {
-		markersToMatch.add(SecurityMarkers.RESTRICTED);
-		markersToMatch.add(SecurityMarkers.CONFIDENTIAL);
-		markersToMatch.add(SecurityMarkers.SECRET);
-		markersToMatch.add(SecurityMarkers.TOP_SECRET);
-	}
+    static {
+        markersToMatch.add(SecurityMarkers.RESTRICTED);
+        markersToMatch.add(SecurityMarkers.CONFIDENTIAL);
+        markersToMatch.add(SecurityMarkers.SECRET);
+        markersToMatch.add(SecurityMarkers.TOP_SECRET);
+    }
 
-	public FilterReply decide(ILoggingEvent event) {
-		if (!isStarted()) {
-			return FilterReply.NEUTRAL;
-		}
+    public FilterReply decide(ILoggingEvent event) {
+        if (!isStarted()) {
+            return FilterReply.NEUTRAL;
+        }
 
-		// make sure the event has a marker
-		Marker eventMarker = event.getMarker();
-		if (eventMarker == null) {
-			return FilterReply.NEUTRAL;
-		}
+        // make sure the event has a marker
+        Marker eventMarker = event.getMarker();
+        if (eventMarker == null) {
+            return FilterReply.NEUTRAL;
+        }
 
-		if (eventMarker.hasReferences()) {
-			// check for events with multiple markers
-			for (Marker marker : markersToMatch) {
-				if (eventMarker.contains(marker)) {
-					return FilterReply.DENY;
-				}
-			}
-		} else {
-			// handle simple case of an event with a single marker
-			if (markersToMatch.contains(eventMarker)) {
-				return FilterReply.DENY;
-			}
-		}
+        if (eventMarker.hasReferences()) {
+            // check for events with multiple markers
+            for (Marker marker : markersToMatch) {
+                if (eventMarker.contains(marker)) {
+                    return FilterReply.DENY;
+                }
+            }
+        } else {
+            // handle simple case of an event with a single marker
+            if (markersToMatch.contains(eventMarker)) {
+                return FilterReply.DENY;
+            }
+        }
 
-		// no classified markers found
-		return FilterReply.NEUTRAL;
-	}
+        // no classified markers found
+        return FilterReply.NEUTRAL;
+    }
 
 }
