@@ -128,6 +128,22 @@ public class SecurityMarkerFilterTest {
     }
 
     @Test
+    public void testAppenderMultipleNonSecurityEvent() {
+        Marker multi = SecurityMarkers.getMarker(SecurityMarkers.EVENT_SUCCESS, SecurityMarkers.CONFIDENTIAL);
+        LOGGER.info(multi, "This statement contains multiple markers: event success and confidential");
+
+        // Now verify our logging interactions
+        verify(mockAppender).doAppend(captorLoggingEvent.capture());
+
+        // Get the logging event from the captor
+        LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+        System.out.println("testAppender(): loggingEvent: " + loggingEvent);
+
+        //check the filter chain decision for this event
+        assertEquals(FilterReply.DENY, mockAppender.getFilterChainDecision(loggingEvent));
+    }
+
+    @Test
     public void testRaw() {
         //create a new marker filter
         SecurityMarkerFilter mkt = new SecurityMarkerFilter();

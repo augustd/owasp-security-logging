@@ -48,13 +48,9 @@ public class SecurityMarkers {
 	public static final Marker EVENT_SUCCESS = MarkerFactory.getDetachedMarker(EVENT_SUCCESS_MARKER_NAME);
 
 	public static final Marker EVENT_FAILURE = MarkerFactory.getDetachedMarker(EVENT_FAILURE_MARKER_NAME);
-	
+        
         public static Marker getMarker(Marker... markers) {
-            Marker output = MarkerFactory.getMarker(""); 
-            output.remove(output);
-            for (Marker marker : markers) {
-                output.add(marker);
-            }
+            Marker output = new MultiMarker(markers); 
             return output;
         }
 }

@@ -6,7 +6,7 @@ import java.util.Formatter;
 
 /**
  * Utilities methods for logging.
- * 
+ *
  * @author August Detlefsen [augustd@codemagi.com]
  */
 public class Utils {
@@ -53,6 +53,17 @@ public class Utils {
             formatter.format("%02x", b);
         }
         return formatter.toString();
+    }
+
+    /**
+     * Determines if a string is null or empty
+     *
+     * @param value string to test
+     * @return       <code>true</code> if the string is empty or null;
+     * <code>false</code> otherwise
+     */
+    public static boolean isEmpty(String value) {
+        return (value == null || value.trim().length() == 0);
     }
 
 }

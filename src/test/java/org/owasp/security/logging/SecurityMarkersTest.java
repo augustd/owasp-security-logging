@@ -3,6 +3,7 @@ package org.owasp.security.logging;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
 
 import org.junit.After;
@@ -24,77 +25,90 @@ import ch.qos.logback.core.Appender;
 @RunWith(MockitoJUnitRunner.class)
 public class SecurityMarkersTest {
 
-	private static final Logger LOGGER = (Logger) LoggerFactory
-			.getLogger(SecurityMarkersTest.class);
+    private static final Logger LOGGER = (Logger)LoggerFactory
+            .getLogger(SecurityMarkersTest.class);
 
-	@Mock
-	private Appender mockAppender;
+    @Mock
+    private Appender mockAppender;
 
-	// Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
-	@Captor
-	private ArgumentCaptor<LoggingEvent> captorLoggingEvent;
+    // Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
+    @Captor
+    private ArgumentCaptor<LoggingEvent> captorLoggingEvent;
 
-	@Before
-	public void setup() {
-		LOGGER.addAppender(mockAppender);
-	}
+    @Before
+    public void setup() {
+        LOGGER.addAppender(mockAppender);
+    }
 
-	@After
-	public void teardown() {
-		LOGGER.detachAppender(mockAppender);
-	}
+    @After
+    public void teardown() {
+        LOGGER.detachAppender(mockAppender);
+    }
 
-	@Test
-	public void test() {
-		LOGGER.info(SecurityMarkers.SECURITY_SUCCESS,
-				"prev=viewCart\r\n[2010-10-21 18:45:15] [steve] Account successfully created");
-		LOGGER.info("some other event");
-	}
+    @Test
+    public void getMarkersTest() {
+        Marker test1 = SecurityMarkers.SECURITY_AUDIT;
+        System.out.println("getMarkersTest(): test1: " + test1);
+        assertTrue(test1.contains(SecurityMarkers.SECURITY_AUDIT));
+        assertFalse(test1.contains(SecurityMarkers.CONFIDENTIAL));
 
-	@Test
-	public void confidentialTest() {
-		Marker confidential = SecurityMarkers.CONFIDENTIAL;
-		confidential.add(SecurityMarkers.SECURITY_AUDIT);
-		String userid = "myId";
-		String password = "password";
-		LOGGER.info(confidential, "userid={}, password='{}'", userid, password);
+        Marker test2 = SecurityMarkers.getMarker(SecurityMarkers.SECURITY_AUDIT, SecurityMarkers.SECURITY_FAILURE);
+        System.out.println("getMarkersTest(): test2: " + test2);
+        assertTrue(test2.contains(SecurityMarkers.SECURITY_AUDIT));
+        assertTrue(test2.contains(SecurityMarkers.SECURITY_FAILURE));
 
-		// Now verify our logging interactions
-		verify(mockAppender).doAppend(captorLoggingEvent.capture());
+        Marker test3 = SecurityMarkers.getMarker(SecurityMarkers.SECURITY_AUDIT, SecurityMarkers.CONFIDENTIAL);
+        System.out.println("getMarkersTest(): test3: " + test3);
+        assertTrue(test3.contains(SecurityMarkers.SECURITY_AUDIT));
+        assertTrue(test3.contains(SecurityMarkers.CONFIDENTIAL));
+        assertFalse(test3.contains(SecurityMarkers.SECURITY_FAILURE));
+    }
 
-		// Get the logging event from the captor
-		final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+    @Test
+    public void confidentialTest() {
+        Marker confidential = SecurityMarkers.CONFIDENTIAL;
+        confidential.add(SecurityMarkers.SECURITY_AUDIT);
+        String userid = "myId";
+        String password = "password";
+        LOGGER.info(confidential, "userid={}, password='{}'", userid, password);
 
-		// Check log level is correct
-		assertThat(loggingEvent.getLevel(), is(Level.INFO));
+        // Now verify our logging interactions
+        verify(mockAppender).doAppend(captorLoggingEvent.capture());
 
-		// check that markers are proper
-		Marker test = loggingEvent.getMarker();
-		assertTrue(test.contains(SecurityMarkers.SECURITY_AUDIT));
-		assertTrue(test.contains(SecurityMarkers.CONFIDENTIAL));
-	}
+        // Get the logging event from the captor
+        final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
 
-	@Test
-	public void multiMarkerTest() {
-		Marker marker = SecurityMarkers.getMarker(
-				SecurityMarkers.SECURITY_SUCCESS, SecurityMarkers.CONFIDENTIAL);
-		LOGGER.info(marker, "Multi-marker test");
+        // Check log level is correct
+        assertThat(loggingEvent.getLevel(), is(Level.INFO));
 
-		// Now verify our logging interactions
-		verify(mockAppender).doAppend(captorLoggingEvent.capture());
+        // check that markers are proper
+        Marker test = loggingEvent.getMarker();
+        assertTrue(test.contains(SecurityMarkers.SECURITY_AUDIT));
+        assertTrue(test.contains(SecurityMarkers.CONFIDENTIAL));
+    }
 
-		// Get the logging event from the captor
-		final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+    @Test
+    public void multiMarkerTest() {
+        Marker marker = SecurityMarkers.getMarker(
+                SecurityMarkers.SECURITY_SUCCESS, SecurityMarkers.CONFIDENTIAL);
+        LOGGER.info(marker, "Multi-marker test");
 
-		// Check log level is correct
-		assertThat(loggingEvent.getLevel(), is(Level.INFO));
+        // Now verify our logging interactions
+        verify(mockAppender).doAppend(captorLoggingEvent.capture());
 
-		// Check the message being logged is correct
-		assertThat(loggingEvent.getFormattedMessage(), is("Multi-marker test"));
+        // Get the logging event from the captor
+        final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
 
-		// check that markers are proper
-		Marker test = loggingEvent.getMarker();
-		assertTrue(test.contains(SecurityMarkers.SECURITY_SUCCESS));
-		assertTrue(test.contains(SecurityMarkers.CONFIDENTIAL));
-	}
+        // Check log level is correct
+        assertThat(loggingEvent.getLevel(), is(Level.INFO));
+
+        // Check the message being logged is correct
+        assertThat(loggingEvent.getFormattedMessage(), is("Multi-marker test"));
+
+        // check that markers are proper
+        Marker test = loggingEvent.getMarker();
+        assertTrue(test.contains(SecurityMarkers.SECURITY_SUCCESS));
+        assertTrue(test.contains(SecurityMarkers.CONFIDENTIAL));
+        assertFalse(test.contains(SecurityMarkers.EVENT_FAILURE));
+    }
 }
