@@ -24,12 +24,6 @@ import org.slf4j.MDC;
  * 
  * This filter adds the following information to the MDC:
  * 
- * <<<<<<< HEAD <li>%X{ipAddress} - The remote IP address of the request (using
- * IPAddressPlugin) <li>%X{session} - A hash of the J2EE session ID (using
- * SessionPlugin) <li>%X{productName} - A product name identifier (specified in
- * web.xml) <li>%X{hostname} - The server hostname (from HttpServletRequest) <li>
- * %X{locale} - The preferred Locale of the client (from
- * HttpServletRequest.getLocale()) =======
  * <ul>
  * <li>%X{ipAddress} - The remote IP address of the request (using
  * IPAddressPlugin)
@@ -39,7 +33,6 @@ import org.slf4j.MDC;
  * <li>%X{locale} - The preferred Locale of the client (from
  * HttpServletRequest.getLocale())
  * </ul>
- * >>>>>>> 30461f4e1a1f77a128bdb508a957cecca568fb60
  * 
  * @author August Detlefsen [augustd@codemagi.com]
  * @see IPlugin
@@ -90,7 +83,10 @@ public class MDCFilter implements Filter {
 
 	/**
 	 * Sample filter that populates the MDC on every request.
-	 */
+         * @param servletRequest The request to filter
+         * @param servletResponse The response to filter
+         * @param filterChain The filter chain for this context 
+   	 */
 	public void doFilter(ServletRequest servletRequest,
 			ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {

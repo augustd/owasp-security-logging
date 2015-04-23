@@ -21,9 +21,11 @@ import ch.qos.logback.core.spi.FilterReply;
  * filters on the filter chain. To enable acceptAll, configure the filter as follows:
  * 
  * <pre>
+ * {@code
  * <filter class="org.owasp.security.logging.filter.SecurityMarkerFilter">
  *     <acceptAll>true</acceptAll>
  * </filter>
+ * }
  * </pre>
  * 
  * @author August Detlefsen [augustd@codemagi.com]
