@@ -36,7 +36,6 @@ public class MaskingRewritePolicy implements RewritePolicy {
      * used to create a new logging event.
      * @return The LogEvent after rewriting.
      */
-    @Override
     public LogEvent rewrite(LogEvent source) {
         //get the markers for the log event. If no markers, nothing cn be tagged confidential and we can return
         Marker sourceMarker = source.getMarker();
