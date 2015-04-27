@@ -5,7 +5,6 @@ import ch.qos.logback.core.LayoutBase;
 
 public class CEFLoggingLayout extends LayoutBase<ILoggingEvent> {
 
-	@Override
 	public String doLayout(ILoggingEvent event) {
 		Prefix prefix = new Prefix();
 		prefix.name = event.getMessage();
