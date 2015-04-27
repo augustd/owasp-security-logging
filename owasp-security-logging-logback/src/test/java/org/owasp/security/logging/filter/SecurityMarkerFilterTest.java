@@ -130,6 +130,7 @@ public class SecurityMarkerFilterTest {
     @Test
     public void testAppenderMultipleNonSecurityEvent() {
         Marker multi = SecurityMarkers.getMarker(SecurityMarkers.EVENT_SUCCESS, SecurityMarkers.CONFIDENTIAL);
+        System.out.println("MARKER: " + multi);
         LOGGER.info(multi, "This statement contains multiple markers: event success and confidential");
 
         // Now verify our logging interactions
