@@ -48,6 +48,9 @@ public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
 		// make sure the event has a marker
 		Marker eventMarker = event.getMarker();
+                System.out.println("------ DECIDE ------");
+                System.out.println("MARKER: " + eventMarker);
+
 		if (eventMarker == null) {
 			return FilterReply.DENY;
 		}
