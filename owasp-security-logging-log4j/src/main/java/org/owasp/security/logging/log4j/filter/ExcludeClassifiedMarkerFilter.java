@@ -72,9 +72,7 @@ public class ExcludeClassifiedMarkerFilter extends AbstractFilter {
     @Override
     public Result filter(LogEvent event) {
         // make sure the event has a marker
-
         org.apache.logging.log4j.Marker eventMarker = event.getMarker();
-        System.out.println("filter: eventMarker: " + eventMarker);
         if (eventMarker == null) {
             return Result.NEUTRAL;
         }
@@ -83,8 +81,6 @@ public class ExcludeClassifiedMarkerFilter extends AbstractFilter {
     }
 
     private Result filter(Marker marker) {
-        System.out.println("------ FILTER ------");
-        System.out.println("MARKER: " + marker);
         if (!isStarted()) {
             return Result.NEUTRAL;
         }
