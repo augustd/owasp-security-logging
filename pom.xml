@@ -29,7 +29,11 @@
         <developerConnection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</developerConnection>
         <url>https://github.com/javabeanz/owasp-security-logging</url>
     </scm>
-  
+
+    <properties>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
     <modules>
         <module>owasp-security-logging-common</module>
         <module>owasp-security-logging-log4j</module>
