@@ -13,7 +13,7 @@ To use this library with Maven, add the following dependency to pom.xml:
 <dependency>
   <groupId>org.owasp</groupId>
   <artifactId>security-logging</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 

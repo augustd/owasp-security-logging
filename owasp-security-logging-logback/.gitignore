@@ -1,0 +1,12 @@
+/target
+/.settings
+/.classpath
+/.project
+*.class
+# Package Files #
+*.jar
+*.war
+*.ear
+
+byUser/access.log
+/.metadata

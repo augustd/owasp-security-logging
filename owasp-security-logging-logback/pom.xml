@@ -1,15 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
-    <!-- Top-level Parent POM -->
-  
+    <parent>
+        <groupId>org.owasp</groupId>
+        <artifactId>security-logging</artifactId>
+        <version>1.0.1</version>
+    </parent>
     <groupId>org.owasp</groupId>
-    <artifactId>security-logging</artifactId>
+    <artifactId>security-logging-logback</artifactId>
     <version>1.0.1</version>
-    <name>OWASP Security Logging</name>
+    <name>OWASP Security Logging Logback</name>
     <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
     <url>https://www.owasp.org/index.php/OWASP_Security_Logging_Project</url>
-    <packaging>pom</packaging>
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -29,40 +30,42 @@
         <developerConnection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</developerConnection>
         <url>https://github.com/javabeanz/owasp-security-logging</url>
     </scm>
-  
-    <modules>
-        <module>owasp-security-logging-common</module>
-        <module>owasp-security-logging-log4j</module>
-        <module>owasp-security-logging-logback</module>
-    </modules>
-    
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.7</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.11</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>RELEASE</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.owasp</groupId>
+            <artifactId>security-logging-common</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <profile> 
