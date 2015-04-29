@@ -33,7 +33,7 @@
         <dependency>
             <groupId>org.owasp</groupId>
             <artifactId>security-logging-common</artifactId>
-            <version>LATEST</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
