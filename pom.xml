@@ -5,7 +5,7 @@
   
     <groupId>org.owasp</groupId>
     <artifactId>security-logging</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>OWASP Security Logging</name>
     <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
     <url>https://www.owasp.org/index.php/OWASP_Security_Logging_Project</url>

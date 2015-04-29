@@ -3,11 +3,10 @@
     <parent>
         <groupId>org.owasp</groupId>
         <artifactId>security-logging</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>security-logging-log4j</artifactId>
-    <version>1.0.0</version>
     <name>OWASP Security Logging Log4j</name>
     <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
     <url>https://www.owasp.org/index.php/OWASP_Security_Logging_Project</url>
