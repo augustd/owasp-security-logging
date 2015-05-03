@@ -35,7 +35,7 @@ public class ExcludeClassifiedMarkerFilterTest {
     Logger LOGGER = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
     @Spy
-    private final Appender mockAppender = LOGGER.getAppender("NOT_CLASSIFIED_CONSOLE");
+    private final Appender<ILoggingEvent> mockAppender = LOGGER.getAppender("NOT_CLASSIFIED_CONSOLE");
 
     // Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
     @Captor

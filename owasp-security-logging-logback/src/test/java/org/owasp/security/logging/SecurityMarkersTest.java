@@ -19,6 +19,7 @@ import org.slf4j.Marker;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.Appender;
 
@@ -29,7 +30,7 @@ public class SecurityMarkersTest {
 			.getLogger(SecurityMarkersTest.class);
 
 	@Mock
-	private Appender mockAppender;
+	private Appender<ILoggingEvent> mockAppender;
 
 	// Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
 	@Captor
@@ -67,7 +68,7 @@ public class SecurityMarkersTest {
 		assertFalse(test3.contains(SecurityMarkers.SECURITY_FAILURE));
 	}
 
-	// @Test
+	@Test
 	public void confidentialTest() {
 		Marker confidential = SecurityMarkers.CONFIDENTIAL;
 		confidential.add(SecurityMarkers.SECURITY_AUDIT);
@@ -88,6 +89,9 @@ public class SecurityMarkersTest {
 		Marker test = loggingEvent.getMarker();
 		assertTrue(test.contains(SecurityMarkers.SECURITY_AUDIT));
 		assertTrue(test.contains(SecurityMarkers.CONFIDENTIAL));
+
+		// cleanup for following tests
+		confidential.remove(SecurityMarkers.SECURITY_AUDIT);
 	}
 
 	@Test

@@ -36,7 +36,7 @@ public class SecurityMarkerFilterTest {
 	Logger LOGGER = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
 	@Spy
-	private final Appender mockAppender = LOGGER
+	private final Appender<ILoggingEvent> mockAppender = LOGGER
 			.getAppender("SECURITY_CONSOLE");
 
 	// Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
@@ -46,12 +46,10 @@ public class SecurityMarkerFilterTest {
 	@Before
 	public void setUp() {
 		LOGGER.addAppender(mockAppender);
-		mockAppender.start();
 	}
 
 	@After
 	public void teardown() {
-		mockAppender.stop();
 		LOGGER.detachAppender(mockAppender);
 	}
 
@@ -71,7 +69,7 @@ public class SecurityMarkerFilterTest {
 				mockAppender.getFilterChainDecision(loggingEvent));
 	}
 
-	// @Test
+	@Test
 	public void testAppenderSecuritySuccess() {
 		LOGGER.info(SecurityMarkers.SECURITY_SUCCESS,
 				"This statement is a security success");
@@ -88,7 +86,7 @@ public class SecurityMarkerFilterTest {
 				mockAppender.getFilterChainDecision(loggingEvent));
 	}
 
-	// @Test
+	@Test
 	public void testAppenderSecurityFailure() {
 		LOGGER.info(SecurityMarkers.SECURITY_FAILURE,
 				"This statement is a security failure");
@@ -122,7 +120,7 @@ public class SecurityMarkerFilterTest {
 				mockAppender.getFilterChainDecision(loggingEvent));
 	}
 
-	// @Test
+	@Test
 	public void testAppenderMultipleEvent() {
 		Marker multi = SecurityMarkers.getMarker(
 				SecurityMarkers.SECURITY_AUDIT, SecurityMarkers.CONFIDENTIAL);
@@ -145,7 +143,7 @@ public class SecurityMarkerFilterTest {
 	public void testAppenderMultipleNonSecurityEvent() {
 		Marker multi = SecurityMarkers.getMarker(SecurityMarkers.EVENT_SUCCESS,
 				SecurityMarkers.CONFIDENTIAL);
-		// System.out.println("MARKER: " + multi);
+		System.out.println("MARKER: " + multi);
 		LOGGER.info(multi,
 				"This statement contains multiple markers: event success and confidential");
 
@@ -154,7 +152,7 @@ public class SecurityMarkerFilterTest {
 
 		// Get the logging event from the captor
 		LoggingEvent loggingEvent = captorLoggingEvent.getValue();
-		// System.out.println("testAppender(): loggingEvent: " + loggingEvent);
+		System.out.println("testAppender(): loggingEvent: " + loggingEvent);
 
 		// check the filter chain decision for this event
 		assertEquals(FilterReply.DENY,
