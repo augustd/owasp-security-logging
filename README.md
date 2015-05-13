@@ -7,13 +7,23 @@ owasp-security-logging
 
 [OWASP Security Logging Project](https://www.owasp.org/index.php/OWASP_Security_Logging_Project) - Standard Java API to log security related events.  [Documentation](https://github.com/javabeanz/owasp-security-logging/wiki)
 
-To use this library with Maven, add the following dependency to pom.xml: 
+As of version 1.1.0 Logback and Log4j support are in separate projects. To use OWASP Security Logging with Logback, add the following Maven dependency to pom.xml:
 
 ```xml
 <dependency>
   <groupId>org.owasp</groupId>
-  <artifactId>security-logging</artifactId>
-  <version>1.0.1</version>
+  <artifactId>security-logging-logback</artifactId>
+  <version>1.1.0</version>
+</dependency>
+```
+
+To use it with Log4j, add: 
+
+```xml
+<dependency>
+  <groupId>org.owasp</groupId>
+  <artifactId>security-logging-log4j</artifactId>
+  <version>1.1.0</version>
 </dependency>
 ```
 
