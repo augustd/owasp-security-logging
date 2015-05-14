@@ -15,7 +15,6 @@ public class SecurityLoggingLayout extends LayoutBase<ILoggingEvent> {
 
 	private static final String LINE_SEP = System.getProperty("line.separator");
 	private String prefix = "Security";
-	private boolean printThreadName = true;
 
 	public String doLayout(ILoggingEvent event) {
 		StringBuilder sbuf = new StringBuilder(128);

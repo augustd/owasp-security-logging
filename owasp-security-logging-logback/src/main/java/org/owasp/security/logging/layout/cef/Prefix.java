@@ -45,7 +45,7 @@ public class Prefix {
 	/**
 	 * key/value pairs with extra
 	 */
-	Map extension = new ExtensionMap();
+	Map<String, String> extension = new ExtensionMap();
 
 	class Device {
 		String vendor = "vendor", product = "product", version = "version";
@@ -62,6 +62,11 @@ public class Prefix {
 
 	class ExtensionMap extends HashMap<String, String> {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1499695924597182375L;
+
 		public ExtensionMap() {
 			put("extension", "value");
 		}
@@ -70,7 +75,7 @@ public class Prefix {
 		 * TODO : encoding, multi-line
 		 */
 		public String toString() {
-			Set keys = this.keySet();
+			Set<String> keys = this.keySet();
 			StringBuilder builder = new StringBuilder();
 			for (Object key : keys) {
 				builder.append(key);

@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.owasp.security.logging.mdc.plugins.IPAddressPlugin;
 import org.owasp.security.logging.mdc.plugins.SessionPlugin;
@@ -83,15 +82,18 @@ public class MDCFilter implements Filter {
 
 	/**
 	 * Sample filter that populates the MDC on every request.
-         * @param servletRequest The request to filter
-         * @param servletResponse The response to filter
-         * @param filterChain The filter chain for this context 
-   	 */
+	 * 
+	 * @param servletRequest
+	 *            The request to filter
+	 * @param servletResponse
+	 *            The response to filter
+	 * @param filterChain
+	 *            The filter chain for this context
+	 */
 	public void doFilter(ServletRequest servletRequest,
 			ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
-		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 		// put values into MDC
 		MDC.put(HOSTNAME, servletRequest.getServerName());

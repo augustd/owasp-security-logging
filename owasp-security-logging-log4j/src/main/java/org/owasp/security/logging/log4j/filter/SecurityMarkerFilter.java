@@ -15,10 +15,10 @@ package org.owasp.security.logging.log4j.filter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.core.Filter.Result;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.config.Node;
@@ -29,7 +29,6 @@ import org.apache.logging.log4j.core.filter.AbstractFilter;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.slf4j.Log4jMarker;
 import org.apache.logging.slf4j.Log4jMarkerFactory;
-import org.owasp.security.logging.MultiMarker;
 import org.owasp.security.logging.SecurityMarkers;
 
 /**
@@ -42,72 +41,83 @@ import org.owasp.security.logging.SecurityMarkers;
 @Plugin(name = "SecurityMarkerFilter", category = Node.CATEGORY, elementType = Filter.ELEMENT_TYPE, printObject = true)
 public class SecurityMarkerFilter extends AbstractFilter {
 
-    private boolean acceptAll = false;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 610457881503552839L;
 
-    static final Log4jMarkerFactory factory = new Log4jMarkerFactory();
+	private boolean acceptAll = false;
 
-    public static final List<org.slf4j.Marker> markersToMatch = new ArrayList<org.slf4j.Marker>(3);
+	static final Log4jMarkerFactory factory = new Log4jMarkerFactory();
 
-    static {
-        markersToMatch.add(SecurityMarkers.SECURITY_SUCCESS);
-        markersToMatch.add(SecurityMarkers.SECURITY_FAILURE);
-        markersToMatch.add(SecurityMarkers.SECURITY_AUDIT);
-    }
+	public static final List<org.slf4j.Marker> markersToMatch = new ArrayList<org.slf4j.Marker>(
+			3);
 
-    private SecurityMarkerFilter(Boolean acceptAll) {
-        super();
-        this.acceptAll = acceptAll;
-    }
+	static {
+		markersToMatch.add(SecurityMarkers.SECURITY_SUCCESS);
+		markersToMatch.add(SecurityMarkers.SECURITY_FAILURE);
+		markersToMatch.add(SecurityMarkers.SECURITY_AUDIT);
+	}
 
-    @Override
-    public Result filter(Logger logger, Level level, Marker marker, String msg, Object[] params) {
-        return filter(marker);
-    }
+	private SecurityMarkerFilter(Boolean acceptAll) {
+		super();
+		this.acceptAll = acceptAll;
+	}
 
-    @Override
-    public Result filter(Logger logger, Level level, Marker marker, Object msg, Throwable t) {
-        return filter(marker);
-    }
+	@Override
+	public Result filter(Logger logger, Level level, Marker marker, String msg,
+			Object[] params) {
+		return filter(marker);
+	}
 
-    @Override
-    public Result filter(Logger logger, Level level, Marker marker, Message msg, Throwable t) {
-        return filter(marker);
-    }
+	@Override
+	public Result filter(Logger logger, Level level, Marker marker, Object msg,
+			Throwable t) {
+		return filter(marker);
+	}
 
-    @Override
-    public Result filter(LogEvent event) {
-        // make sure the event has a marker
-        org.apache.logging.log4j.Marker eventMarker = event.getMarker();
-        if (eventMarker == null) {
-            return Result.DENY;
-        }
+	@Override
+	public Result filter(Logger logger, Level level, Marker marker,
+			Message msg, Throwable t) {
+		return filter(marker);
+	}
 
-        return filter(eventMarker);
-    }
+	@Override
+	public Result filter(LogEvent event) {
+		// make sure the event has a marker
+		org.apache.logging.log4j.Marker eventMarker = event.getMarker();
+		if (eventMarker == null) {
+			return Result.DENY;
+		}
 
-    private Result filter(Marker marker) {
-        if (!isStarted()) {
-            return Result.NEUTRAL;
-        }
+		return filter(eventMarker);
+	}
 
-        org.apache.logging.slf4j.Log4jMarker slf4jMarker = new Log4jMarker(marker);
-        for (org.slf4j.Marker matcher : markersToMatch) {
-            if (slf4jMarker.contains(matcher.getName())) {
-                return Result.ACCEPT;
-            }
-        }
+	private Result filter(Marker marker) {
+		if (!isStarted()) {
+			return Result.NEUTRAL;
+		}
 
-        return Result.DENY;
-    }
+		org.apache.logging.slf4j.Log4jMarker slf4jMarker = new Log4jMarker(
+				marker);
+		for (org.slf4j.Marker matcher : markersToMatch) {
+			if (slf4jMarker.contains(matcher.getName())) {
+				return Result.ACCEPT;
+			}
+		}
 
-    /**
-     * Create a SecurityMarkerFilter.
-     *
-     * @param acceptAll
-     * @return The created ThresholdFilter.
-     */
-    @PluginFactory
-    public static SecurityMarkerFilter createFilter(@PluginAttribute(value = "acceptAll", defaultBoolean = false) boolean acceptAll) {
-        return new SecurityMarkerFilter(acceptAll);
-    }
+		return Result.DENY;
+	}
+
+	/**
+	 * Create a SecurityMarkerFilter.
+	 *
+	 * @param acceptAll
+	 * @return The created ThresholdFilter.
+	 */
+	@PluginFactory
+	public static SecurityMarkerFilter createFilter(
+			@PluginAttribute(value = "acceptAll", defaultBoolean = false) boolean acceptAll) {
+		return new SecurityMarkerFilter(acceptAll);
+	}
 }

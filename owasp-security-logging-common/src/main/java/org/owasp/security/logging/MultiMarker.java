@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import org.slf4j.Marker;
 
 /**
@@ -25,92 +26,96 @@ import org.slf4j.Marker;
  */
 public class MultiMarker implements org.slf4j.Marker {
 
-    private String name = "";
-    private final Set<Marker> references = new LinkedHashSet<Marker>();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2438877789519766569L;
+	private String name = "";
+	private final Set<Marker> references = new LinkedHashSet<Marker>();
 
-    public MultiMarker(Marker... markers) {
-        references.addAll(Arrays.asList(markers));
-        updateName();
-    }
+	public MultiMarker(Marker... markers) {
+		references.addAll(Arrays.asList(markers));
+		updateName();
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void add(Marker reference) {
-        references.add(reference);
-        updateName();
-    }
+	public void add(Marker reference) {
+		references.add(reference);
+		updateName();
+	}
 
-    public boolean remove(Marker reference) {
-        boolean output = references.remove(reference);
-        updateName();
-        return output;
-    }
+	public boolean remove(Marker reference) {
+		boolean output = references.remove(reference);
+		updateName();
+		return output;
+	}
 
-    private void updateName() {
-        name = "";
-        for (Marker ref : references) {
-            if (!Utils.isEmpty(name)) {
-                name += " ";
-            }
-            name += ref.getName();
-        }
-    }
+	private void updateName() {
+		name = "";
+		for (Marker ref : references) {
+			if (!Utils.isEmpty(name)) {
+				name += " ";
+			}
+			name += ref.getName();
+		}
+	}
 
-    public boolean hasChildren() {
-        return true;
-    }
+	public boolean hasChildren() {
+		return true;
+	}
 
-    public boolean hasReferences() {
-        return true;
-    }
+	public boolean hasReferences() {
+		return true;
+	}
 
-    public Iterator<Marker> iterator() {
-        return references.iterator();
-    }
+	public Iterator<Marker> iterator() {
+		return references.iterator();
+	}
 
-    public boolean contains(Marker other) {
-        for (Marker ref : references) {
-            if (ref.contains(other)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean contains(Marker other) {
+		for (Marker ref : references) {
+			if (ref.contains(other)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public boolean contains(String name) {
-        for (Marker ref : references) {
-            if (ref.contains(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean contains(String name) {
+		for (Marker ref : references) {
+			if (ref.contains(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Marker)) {
-            return false;
-        }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Marker)) {
+			return false;
+		}
 
-        final Marker other = (Marker) obj;
-        return name.equals(other.getName());
-    }
+		final Marker other = (Marker) obj;
+		return name.equals(other.getName());
+	}
 
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
 
-    @Override
-    public String toString() {
-        return name;
-    }
+	@Override
+	public String toString() {
+		return name;
+	}
 }
