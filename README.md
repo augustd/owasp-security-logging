@@ -2,6 +2,9 @@
 
 [![Coverity Scan Status](https://scan.coverity.com/projects/3657/badge.svg)](https://scan.coverity.com/projects/3657)
 
+[![License][license-image]][license-url]
+[![Version][maven-version]][maven-url]
+
 owasp-security-logging
 ======================
 
@@ -29,3 +32,12 @@ To use it with Log4j, add:
 (Log4j users please see [Usage with Log4j](https://github.com/javabeanz/owasp-security-logging/wiki/Usage-with-Log4j))
 
 Maven imports will automatically include the common classes. If using OWASP Security Logging on your classpath, you need to include security-logging-common-VERSION.jar in addition to the correct jar for either Logback or Log4j. 
+
+----
+
+[license-url]: https://github.com/javabeanz/owasp-security-logging/blob/master/LICENSE
+[license-image]: https://img.shields.io/badge/license-apache%20v2-brightgreen.svg
+
+[maven-url]: http://search.maven.org/#browse|-1016717255
+[maven-version]: https://img.shields.io/maven-central/v/org.owasp/security-logging.svg?style=flat
+
