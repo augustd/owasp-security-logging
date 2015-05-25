@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -42,31 +40,11 @@ public class RichContext {
 		return Long.parseLong(processName.split("@")[0]);
 	}
 
-	public String getApplicationNamed() {
-		URLClassLoader cl = (URLClassLoader) getClass().getClassLoader();
-		try {
-			URL url = cl.findResource("META-INF/MANIFEST.MF");
-			Manifest manifest = new Manifest(url.openStream());
-			Attributes attrs = manifest.getMainAttributes();
-
-			// does this work for all java applications ?
-			String appName = attrs.getValue("Implementation-Title");
-			if (appName == null) {
-				appName = "UNKNOWN";
-			}
-			return appName;
-		} catch (IOException E) {
-			// handle
-		}
-		return null;
-	}
-
 	public String getApplicationName() {
 
-		InputStream manifestStream = Thread.currentThread()
+		try (InputStream manifestStream = Thread.currentThread()
 				.getContextClassLoader()
-				.getResourceAsStream("META-INF/MANIFEST.MF");
-		try {
+				.getResourceAsStream("META-INF/MANIFEST.MF")) {
 			Manifest manifest = new Manifest(manifestStream);
 			Attributes attrs = manifest.getMainAttributes();
 
@@ -83,7 +61,7 @@ public class RichContext {
 	}
 
 	public static String getHMAC(String msg) {
-		String macKey = "The HMAC key";
+		String macKey = System.getProperty("hmac.key", "HMAC KEY");
 
 		Mac mac;
 		char[] checksum = "<unknown HMAC>".toCharArray();
