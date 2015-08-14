@@ -10,3 +10,6 @@
 
 byUser/access.log
 /.metadata
+/cov-int
+/cov-int.zip
+/server.key
