@@ -25,13 +25,6 @@
       <organizationUrl>http://www.codemagi.com</organizationUrl>
     </developer>
   </developers>
-  <!--
-      <scm>
-          <connection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</connection>
-          <developerConnection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</developerConnection>
-          <url>https://github.com/javabeanz/owasp-security-logging</url>
-      </scm>
-    -->
   <dependencies>
     <dependency>
       <groupId>org.owasp</groupId>
@@ -68,11 +61,6 @@
       <version>2.2</version>
       <type>test-jar</type>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
   <profiles>

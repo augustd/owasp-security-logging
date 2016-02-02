@@ -19,3 +19,8 @@ addons:
     build_command_prepend: "mvn clean"
     build_command:   "mvn install"
     branch_pattern: coverity_scan
+
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov

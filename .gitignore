@@ -13,3 +13,6 @@ byUser/access.log
 /cov-int
 /cov-int.zip
 /server.key
+/RemoteSystemsTempFiles
+/npm-debug.log
+/output.log
