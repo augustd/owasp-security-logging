@@ -37,6 +37,7 @@ Maven imports will automatically include the common classes. If using OWASP Secu
 
 [license-url]: https://github.com/javabeanz/owasp-security-logging/blob/master/LICENSE
 [license-image]: https://img.shields.io/badge/license-apache%20v2-brightgreen.svg
+[![codecov.io](https://codecov.io/github/codecov/codecov-ruby/coverage.svg?branch=master)](https://codecov.io/github/codecov/codecov-ruby?branch=master)
 
 [maven-url]: http://search.maven.org/#browse|-1016717255
 [maven-version]: https://img.shields.io/maven-central/v/org.owasp/security-logging.svg?style=flat

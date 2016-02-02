@@ -1,13 +1,14 @@
 language: java
 
-jdk:
-  - oraclejdk7
-  - oraclejdk8
-
 before_install:
   - pip install --user codecov
 after_success:
   - codecov
+
+jdk:
+  - oraclejdk7
+  - oraclejdk8
+
 
 env:
   global:
