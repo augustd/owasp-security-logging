@@ -4,6 +4,11 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov
+
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
@@ -20,7 +25,3 @@ addons:
     build_command:   "mvn install"
     branch_pattern: coverity_scan
 
-before_install:
-  - pip install --user codecov
-after_success:
-  - codecov
