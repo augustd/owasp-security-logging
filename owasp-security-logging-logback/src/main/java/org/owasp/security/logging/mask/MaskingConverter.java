@@ -4,6 +4,7 @@ import org.owasp.security.logging.SecurityMarkers;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.pattern.ReplacingCompositeConverter;
+
 import org.slf4j.Marker;
 import org.slf4j.helpers.MessageFormatter;
 
@@ -21,16 +22,16 @@ import org.slf4j.helpers.MessageFormatter;
 public class MaskingConverter extends
         ReplacingCompositeConverter<ILoggingEvent> {
 
-    @Override
+    public static final String MASKED_PASSWORD = "********";
+
+	@Override
     public String convert(ILoggingEvent event) {
         Marker eventMarker = event.getMarker();
 
         Object[] args = event.getArgumentArray();
         if (eventMarker != null && eventMarker.equals(SecurityMarkers.CONFIDENTIAL)) {            
             for (int i = 0; i < args.length; i++) {
-                String arg = args[i].toString();
-                arg = arg.replaceAll(".", "*");
-                args[i] = arg;
+                args[i] = MASKED_PASSWORD;
             }
         }
         

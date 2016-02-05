@@ -44,7 +44,6 @@ public class MDCFilter implements Filter {
 	private static final String HOSTNAME = "hostName";
 	private static final String PRODUCTNAME = "productName";
 
-	private FilterConfig filterConfig;
 	private String productName;
 
 	private static final Map<String, IPlugin> plugins = new LinkedHashMap<String, IPlugin>();
@@ -55,8 +54,6 @@ public class MDCFilter implements Filter {
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		this.filterConfig = filterConfig;
-
 		// process plugins in filter config
 		Enumeration<?> e = filterConfig.getInitParameterNames();
 		while (e.hasMoreElements()) {

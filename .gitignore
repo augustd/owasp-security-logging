@@ -16,3 +16,6 @@ byUser/access.log
 /RemoteSystemsTempFiles
 /npm-debug.log
 /output.log
+.project
+/Servers/.settings
+/Servers

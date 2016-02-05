@@ -12,9 +12,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.access.PatternLayoutEncoder;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 
@@ -26,7 +27,7 @@ public class SecurityTest {
 	Logger LOGGER;
 
 	@Mock
-	private RollingFileAppender mockAppender = new RollingFileAppender();
+	private RollingFileAppender<ILoggingEvent> mockAppender = new RollingFileAppender<ILoggingEvent>();
 
 	// Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
 	@Captor

@@ -74,7 +74,6 @@ public class RichContext {
 
 			mac.init(secret);
 			byte[] doFinal = mac.doFinal(dataBytes);
-			byte[] hexB = new Hex().encode(doFinal);
 			checksum = Hex.encodeHex(doFinal);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -94,12 +93,12 @@ public class RichContext {
 		try {
 			InetAddress candidateAddress = null;
 			// Iterate all NICs (network interface cards)...
-			for (Enumeration ifaces = NetworkInterface.getNetworkInterfaces(); ifaces
+			for (Enumeration<NetworkInterface> ifaces = NetworkInterface.getNetworkInterfaces(); ifaces
 					.hasMoreElements();) {
 				NetworkInterface iface = (NetworkInterface) ifaces
 						.nextElement();
 				// Iterate all IP addresses assigned to each card...
-				for (Enumeration inetAddrs = iface.getInetAddresses(); inetAddrs
+				for (Enumeration<InetAddress> inetAddrs = iface.getInetAddresses(); inetAddrs
 						.hasMoreElements();) {
 					InetAddress inetAddr = (InetAddress) inetAddrs
 							.nextElement();

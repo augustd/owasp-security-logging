@@ -30,7 +30,10 @@ import org.owasp.security.logging.SecurityMarkers;
 @Plugin(name = "MaskingRewritePolicy", category = "Core", elementType = "rewritePolicy", printObject = true)
 public class MaskingRewritePolicy implements RewritePolicy {
 
-    /**
+	
+    private static final Object MASKED_PASSWORD = "********";
+
+	/**
      * Rewrite the event.
      * @param source a logging event that may be returned or
      * used to create a new logging event.
@@ -55,11 +58,8 @@ public class MaskingRewritePolicy implements RewritePolicy {
         
         //we have a message, parameters, a marker, and it is confidential. Process
         for (int i = 0; i < params.length; i++) {
-            String arg = params[i].toString();
-            arg = arg.replaceAll(".", "*");
-            params[i] = arg;
+            params[i] = MASKED_PASSWORD;
         }
-        
         Message outMessage = new ParameterizedMessage(msg.getFormat(), params, msg.getThrowable());
         LogEvent output = new Log4jLogEvent(source.getLoggerName(), source.getMarker(), source.getLoggerFqcn(), source.getLevel(),
             outMessage, source.getThrown(), source.getContextMap(), source.getContextStack(), source.getThreadName(),

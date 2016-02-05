@@ -13,26 +13,31 @@
  */
 package org.owasp.security.logging.mask;
 
-//import ch.qos.logback.classic.PatternLayoutEncoder;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import static org.hamcrest.CoreMatchers.is;
+
 import org.junit.After;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
+
 import static org.mockito.Mockito.verify;
+
 import org.mockito.runners.MockitoJUnitRunner;
 import org.owasp.security.logging.SecurityMarkers;
 import org.slf4j.LoggerFactory;
@@ -51,7 +56,7 @@ public class MaskingConverterTest {
     PatternLayoutEncoder encoder;
     
     @Mock
-    private RollingFileAppender mockAppender = new RollingFileAppender();
+    private RollingFileAppender<ILoggingEvent> mockAppender = new RollingFileAppender<ILoggingEvent>();
 
     // Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
     @Captor
@@ -95,7 +100,7 @@ public class MaskingConverterTest {
 
         // Check the message being logged is correct 
         String layoutMessage = encoder.getLayout().doLayout(loggingEvent);
-        assertTrue(layoutMessage.contains("userid=****, password='******'"));
+        assertTrue(layoutMessage.contains("userid=" + MaskingConverter.MASKED_PASSWORD + ", password='" + MaskingConverter.MASKED_PASSWORD + "'"));
         assertFalse(layoutMessage.contains("secret"));
     }
 
