@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Owasp-security-logging : OWASP Security Logging library for Java">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Owasp-security-logging</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/javabeanz/owasp-security-logging">View on GitHub</a>
+
+          <h1 id="project_title">Owasp-security-logging</h1>
+          <h2 id="project_tagline">OWASP Security Logging library for Java</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/javabeanz/owasp-security-logging/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/javabeanz/owasp-security-logging/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="https://travis-ci.org/javabeanz/owasp-security-logging"><img src="https://travis-ci.org/javabeanz/owasp-security-logging.svg?branch=master" alt="Build Status"></a></p>
+
+<p><a href="https://scan.coverity.com/projects/3657"><img src="https://scan.coverity.com/projects/3657/badge.svg" alt="Coverity Scan Status"></a>
+<a href="https://codecov.io/github/javabeanz/owasp-security-logging?branch=master"><img src="https://codecov.io/github/javabeanz/owasp-security-logging/coverage.svg?branch=master" alt="codecov.io"></a></p>
+
+<p><a href="https://github.com/javabeanz/owasp-security-logging/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-apache%20v2-brightgreen.svg" alt="License"></a>
+<a href="http://search.maven.org/#browse%7C-1016717255"><img src="https://img.shields.io/maven-central/v/org.owasp/security-logging.svg?style=flat" alt="Version"></a></p>
+
+<h1>
+<a id="owasp-security-logging" class="anchor" href="#owasp-security-logging" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>owasp-security-logging</h1>
+
+<p><a href="https://www.owasp.org/index.php/OWASP_Security_Logging_Project">OWASP Security Logging Project</a> - Standard Java API to log security related events.  <a href="https://github.com/javabeanz/owasp-security-logging/wiki">Documentation</a></p>
+
+<p>As of version 1.1.0 Logback and Log4j support are in separate projects. To use OWASP Security Logging with Logback, add the following Maven dependency to pom.xml:</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+  &lt;<span class="pl-ent">groupId</span>&gt;org.owasp&lt;/<span class="pl-ent">groupId</span>&gt;
+  &lt;<span class="pl-ent">artifactId</span>&gt;security-logging-logback&lt;/<span class="pl-ent">artifactId</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;1.1.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<p>To use it with Log4j, add: </p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+  &lt;<span class="pl-ent">groupId</span>&gt;org.owasp&lt;/<span class="pl-ent">groupId</span>&gt;
+  &lt;<span class="pl-ent">artifactId</span>&gt;security-logging-log4j&lt;/<span class="pl-ent">artifactId</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;1.1.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<p>(Log4j users please see <a href="https://github.com/javabeanz/owasp-security-logging/wiki/Usage-with-Log4j">Usage with Log4j</a>)</p>
+
+<p>Maven imports will automatically include the common classes. If using OWASP Security Logging on your classpath, you need to include security-logging-common-VERSION.jar in addition to the correct jar for either Logback or Log4j. </p>
+
+<hr>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Owasp-security-logging maintained by <a href="https://github.com/javabeanz">javabeanz</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
