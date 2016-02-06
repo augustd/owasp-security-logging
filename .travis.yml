@@ -1,28 +1,25 @@
 language: java
-
 before_install:
-  - pip install --user codecov
+- pip install --user codecov
 after_success:
-  - codecov
-
+- codecov
 jdk:
-  - oraclejdk7
-  - oraclejdk8
-
-
+- oraclejdk7
+- oraclejdk8
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "MgtArzPv9aJsLweGZoXURV3578v8Upn0nbwhH4/hA5Op1Fz8ljqHKh6UeNrNU0aOLOKsxRIhfTrB4Gy0rbe14JwhHSDC04yXg+Tyz90OUsOkDXq/YymoebF/bygwTTliEvVry11GaccK9ls10UF0GoUw0lcRjOEw79BpNMSvG2Y="
-
+  - secure: MgtArzPv9aJsLweGZoXURV3578v8Upn0nbwhH4/hA5Op1Fz8ljqHKh6UeNrNU0aOLOKsxRIhfTrB4Gy0rbe14JwhHSDC04yXg+Tyz90OUsOkDXq/YymoebF/bygwTTliEvVry11GaccK9ls10UF0GoUw0lcRjOEw79BpNMSvG2Y=
+   # The next declaration is the encrypted GH_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+  - secure: ZpZ99uXUARB8NekMjtHGEmOjEcVpwMEug7IHvsNv2w3TYwyMDSnwGpSpyJoze4Az1N1U0tZMtJdd47d/WMxoRz7OX0gtqIvrc0Ldus8NiCPN/8b6AmnzwKRVvV0yTuOKdKIGIdbMlyIuLnRHMKhnlinZ1VZHtF5Nj3QgiaRQ6x8=
 addons:
   coverity_scan:
     project:
-      name: "javabeanz/owasp-security-logging"
-      description: "OWASP Java Security Logging API"
+      name: javabeanz/owasp-security-logging
+      description: OWASP Java Security Logging API
     notification_email: java.development@gmail.com
-    build_command_prepend: "mvn clean"
-    build_command:   "mvn install"
+    build_command_prepend: mvn clean
+    build_command: mvn install
     branch_pattern: coverity_scan
-

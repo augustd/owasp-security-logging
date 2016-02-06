@@ -6,7 +6,7 @@
     <groupId>org.owasp</groupId>
     <version>1.1.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
-</parent>
+  </parent>
   <artifactId>security-logging-common</artifactId>
   <name>OWASP Security Logging Common</name>
   <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
