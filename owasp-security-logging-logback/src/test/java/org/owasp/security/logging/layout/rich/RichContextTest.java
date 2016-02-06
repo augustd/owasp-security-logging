@@ -17,7 +17,7 @@ public class RichContextTest {
 
 	@Test
 	public void testGetPID() {
-		assertTrue(ctx.getPID() > 0);
+		assertTrue(RichContext.getPID() > 0);
 	}
 
 	// @Test

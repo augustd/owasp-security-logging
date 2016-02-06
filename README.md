@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/javabeanz/owasp-security-logging.svg?branch=master)](https://travis-ci.org/javabeanz/owasp-security-logging)
 
 [![Coverity Scan Status](https://scan.coverity.com/projects/3657/badge.svg)](https://scan.coverity.com/projects/3657)
-[![codecov.io](https://codecov.io/github/codecov/codecov-ruby/coverage.svg?branch=master)](https://codecov.io/github/codecov/codecov-ruby?branch=master)
+[![codecov.io](https://codecov.io/github/javabeanz/owasp-security-logging/coverage.svg?branch=master)](https://codecov.io/github/javabeanz/owasp-security-logging?branch=master)
 
 [![License][license-image]][license-url]
 [![Version][maven-version]][maven-url]

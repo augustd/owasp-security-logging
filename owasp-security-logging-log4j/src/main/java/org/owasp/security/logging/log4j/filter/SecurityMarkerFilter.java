@@ -46,8 +46,6 @@ public class SecurityMarkerFilter extends AbstractFilter {
 	 */
 	private static final long serialVersionUID = 610457881503552839L;
 
-	private boolean acceptAll = false;
-
 	static final Log4jMarkerFactory factory = new Log4jMarkerFactory();
 
 	public static final List<org.slf4j.Marker> markersToMatch = new ArrayList<org.slf4j.Marker>(
@@ -61,12 +59,11 @@ public class SecurityMarkerFilter extends AbstractFilter {
 
 	private SecurityMarkerFilter(Boolean acceptAll) {
 		super();
-		this.acceptAll = acceptAll;
 	}
 
 	@Override
 	public Result filter(Logger logger, Level level, Marker marker, String msg,
-			Object[] params) {
+			Object... params) {
 		return filter(marker);
 	}
 
