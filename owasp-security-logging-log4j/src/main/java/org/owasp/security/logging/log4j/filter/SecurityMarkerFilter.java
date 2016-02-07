@@ -57,10 +57,6 @@ public class SecurityMarkerFilter extends AbstractFilter {
 		markersToMatch.add(SecurityMarkers.SECURITY_AUDIT);
 	}
 
-	private SecurityMarkerFilter(Boolean acceptAll) {
-		super();
-	}
-
 	@Override
 	public Result filter(Logger logger, Level level, Marker marker, String msg,
 			Object... params) {
@@ -115,6 +111,6 @@ public class SecurityMarkerFilter extends AbstractFilter {
 	@PluginFactory
 	public static SecurityMarkerFilter createFilter(
 			@PluginAttribute(value = "acceptAll", defaultBoolean = false) boolean acceptAll) {
-		return new SecurityMarkerFilter(acceptAll);
+		return new SecurityMarkerFilter();
 	}
 }

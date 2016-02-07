@@ -59,8 +59,7 @@ public class MaskingRewritePolicy implements RewritePolicy {
 
 		// check if this event is actually marked as confidential. If not,
 		// return
-		org.apache.logging.slf4j.Log4jMarker eventMarker = new Log4jMarker(
-				sourceMarker);
+		Log4jMarker eventMarker = new Log4jMarker(sourceMarker);
 		if (!eventMarker.contains(SecurityMarkers.CONFIDENTIAL))
 			return source;
 
