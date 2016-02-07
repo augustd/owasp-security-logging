@@ -24,7 +24,7 @@ public class SecurityMarkers {
 	public static final String EVENT_FAILURE_MARKER_NAME = "EVENT FAILURE";
 	public static final String EVENT_UNSPECIFIED_MARKER_NAME = "EVENT UNSPECIFIED";
 
-        //information classification
+	// information classification
 	public static final Marker RESTRICTED = MarkerFactory
 			.getDetachedMarker(RESTRICTED_MARKER_NAME);
 
@@ -37,20 +37,25 @@ public class SecurityMarkers {
 	public static final Marker TOP_SECRET = MarkerFactory
 			.getDetachedMarker(TOP_SECRET_MARKER_NAME);
 
-        //security events
-	public static final Marker SECURITY_SUCCESS = MarkerFactory.getDetachedMarker(SECURITY_SUCCESS_MARKER_NAME);
+	// security events
+	public static final Marker SECURITY_SUCCESS = MarkerFactory
+			.getDetachedMarker(SECURITY_SUCCESS_MARKER_NAME);
 
-	public static final Marker SECURITY_FAILURE = MarkerFactory.getDetachedMarker(SECURITY_FAILURE_MARKER_NAME);
+	public static final Marker SECURITY_FAILURE = MarkerFactory
+			.getDetachedMarker(SECURITY_FAILURE_MARKER_NAME);
 
-	public static final Marker SECURITY_AUDIT = MarkerFactory.getDetachedMarker(SECURITY_AUDIT_MARKER_NAME);
+	public static final Marker SECURITY_AUDIT = MarkerFactory
+			.getDetachedMarker(SECURITY_AUDIT_MARKER_NAME);
 
-        //non-security events
-	public static final Marker EVENT_SUCCESS = MarkerFactory.getDetachedMarker(EVENT_SUCCESS_MARKER_NAME);
+	// non-security events
+	public static final Marker EVENT_SUCCESS = MarkerFactory
+			.getDetachedMarker(EVENT_SUCCESS_MARKER_NAME);
 
-	public static final Marker EVENT_FAILURE = MarkerFactory.getDetachedMarker(EVENT_FAILURE_MARKER_NAME);
-        
-        public static Marker getMarker(Marker... markers) {
-            Marker output = new MultiMarker(markers); 
-            return output;
-        }
+	public static final Marker EVENT_FAILURE = MarkerFactory
+			.getDetachedMarker(EVENT_FAILURE_MARKER_NAME);
+
+	public static Marker getMarker(Marker... markers) {
+		Marker output = new MultiMarker(markers);
+		return output;
+	}
 }

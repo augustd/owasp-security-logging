@@ -13,12 +13,13 @@
  */
 package org.owasp.security.logging.log4j.mask;
 
+import static org.junit.Assert.assertTrue;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.pattern.EncodingPatternConverter;
 import org.apache.logging.log4j.junit.InitialLoggerContext;
 import org.apache.logging.log4j.test.appender.ListAppender;
 import org.junit.After;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -28,46 +29,49 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Log4j already includes a converter to escape carriage returns and line feeds.
- * This test just verifies that it works as expected. 
+ * This test just verifies that it works as expected.
  * 
  * @author August Detlefsen [augustd@codemagi.com]
  */
 @RunWith(MockitoJUnitRunner.class)
 public class CRLFConverterTest {
 
-    private static final String CONFIG = "log4j2.xml";
-    
-    @ClassRule
-    public static InitialLoggerContext context = new InitialLoggerContext(CONFIG);
+	private static final String CONFIG = "log4j2.xml";
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CRLFConverterTest.class);
-    
-    ListAppender appender;
+	@ClassRule
+	public static InitialLoggerContext context = new InitialLoggerContext(
+			CONFIG);
 
-    @Before
-    public void setUp() {
-        System.out.println("CONTEXT: " + context);
-        appender = context.getListAppender("List");
-    }
+	private static final org.slf4j.Logger LOGGER = LoggerFactory
+			.getLogger(CRLFConverterTest.class);
 
-    @After
-    public void teardown() {
-    }
+	ListAppender appender;
 
-    @Test
-    public void test() {
-        LOGGER.info("This message contains \r\n line feeds");
+	@Before
+	public void setUp() {
+		System.out.println("CONTEXT: " + context);
+		appender = context.getListAppender("List");
+	}
 
-        // Check the message being logged is correct 
-        LogEvent nulEvent = appender.getEvents().get(0);
-        
-        final String[] options = new String[]{"%msg"};
-        final EncodingPatternConverter converter = EncodingPatternConverter
-            .newInstance(context.getConfiguration(), options);
-        final StringBuilder sb = new StringBuilder();
-        converter.format(nulEvent, sb);
+	@After
+	public void teardown() {
+	}
 
-        assertTrue(sb.toString().contains("This message contains \\r\\n line feeds"));
-    }
+	@Test
+	public void test() {
+		LOGGER.info("This message contains \r\n line feeds");
+
+		// Check the message being logged is correct
+		LogEvent nulEvent = appender.getEvents().get(0);
+
+		final String[] options = new String[] { "%msg" };
+		final EncodingPatternConverter converter = EncodingPatternConverter
+				.newInstance(context.getConfiguration(), options);
+		final StringBuilder sb = new StringBuilder();
+		converter.format(nulEvent, sb);
+
+		assertTrue(sb.toString().contains(
+				"This message contains \\r\\n line feeds"));
+	}
 
 }

@@ -30,42 +30,54 @@ import org.owasp.security.logging.SecurityMarkers;
 @Plugin(name = "MaskingRewritePolicy", category = "Core", elementType = "rewritePolicy", printObject = true)
 public class MaskingRewritePolicy implements RewritePolicy {
 
-	
-    private static final Object MASKED_PASSWORD = "********";
+	private static final Object MASKED_PASSWORD = "********";
 
 	/**
-     * Rewrite the event.
-     * @param source a logging event that may be returned or
-     * used to create a new logging event.
-     * @return The LogEvent after rewriting.
-     */
-    public LogEvent rewrite(LogEvent source) {
-        //get the markers for the log event. If no markers, nothing cn be tagged confidential and we can return
-        Marker sourceMarker = source.getMarker();
-        if (sourceMarker == null) return source;
-        
-        //get the message. If no message we can return
-        final Message msg = source.getMessage();
-        if (msg == null || !(msg instanceof ParameterizedMessage)) return source;
-        
-        //get the parameters. If no params we can return 
-        Object[] params = msg.getParameters();
-        if (params == null || params.length == 0) return source;
-        
-        //check if this event is actually marked as confidential. If not, return
-        org.apache.logging.slf4j.Log4jMarker eventMarker = new Log4jMarker(sourceMarker);
-        if (!eventMarker.contains(SecurityMarkers.CONFIDENTIAL)) return source;
-        
-        //we have a message, parameters, a marker, and it is confidential. Process
-        for (int i = 0; i < params.length; i++) {
-            params[i] = MASKED_PASSWORD;
-        }
-        Message outMessage = new ParameterizedMessage(msg.getFormat(), params, msg.getThrowable());
-        LogEvent output = new Log4jLogEvent(source.getLoggerName(), source.getMarker(), source.getLoggerFqcn(), source.getLevel(),
-            outMessage, source.getThrown(), source.getContextMap(), source.getContextStack(), source.getThreadName(),
-            source.getSource(), source.getTimeMillis());
-        
-        return output;
-    }
-    
+	 * Rewrite the event.
+	 * 
+	 * @param source
+	 *            a logging event that may be returned or used to create a new
+	 *            logging event.
+	 * @return The LogEvent after rewriting.
+	 */
+	public LogEvent rewrite(LogEvent source) {
+		// get the markers for the log event. If no markers, nothing cn be
+		// tagged confidential and we can return
+		Marker sourceMarker = source.getMarker();
+		if (sourceMarker == null)
+			return source;
+
+		// get the message. If no message we can return
+		final Message msg = source.getMessage();
+		if (msg == null || !(msg instanceof ParameterizedMessage))
+			return source;
+
+		// get the parameters. If no params we can return
+		Object[] params = msg.getParameters();
+		if (params == null || params.length == 0)
+			return source;
+
+		// check if this event is actually marked as confidential. If not,
+		// return
+		org.apache.logging.slf4j.Log4jMarker eventMarker = new Log4jMarker(
+				sourceMarker);
+		if (!eventMarker.contains(SecurityMarkers.CONFIDENTIAL))
+			return source;
+
+		// we have a message, parameters, a marker, and it is confidential.
+		// Process
+		for (int i = 0; i < params.length; i++) {
+			params[i] = MASKED_PASSWORD;
+		}
+		Message outMessage = new ParameterizedMessage(msg.getFormat(), params,
+				msg.getThrowable());
+		LogEvent output = new Log4jLogEvent(source.getLoggerName(),
+				source.getMarker(), source.getLoggerFqcn(), source.getLevel(),
+				outMessage, source.getThrown(), source.getContextMap(),
+				source.getContextStack(), source.getThreadName(),
+				source.getSource(), source.getTimeMillis());
+
+		return output;
+	}
+
 }

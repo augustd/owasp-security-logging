@@ -51,13 +51,13 @@ public class Utils {
 	 * @return Hex encoded String of the input byte array
 	 */
 	private static String byteArray2Hex(final byte[] hash) {
-		Formatter formatter = new Formatter();
-		for (byte b : hash) {
-			formatter.format("%02x", b);
+		try (Formatter formatter = new Formatter();) {
+			for (byte b : hash) {
+				formatter.format("%02x", b);
+			}
+			String hex = formatter.toString();
+			return hex;
 		}
-		String hex = formatter.toString();
-		formatter.close();
-		return hex;
 	}
 
 	/**

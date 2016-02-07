@@ -55,12 +55,14 @@ public class MultiMarker implements org.slf4j.Marker {
 
 	private void updateName() {
 		name = "";
+		StringBuilder builder = new StringBuilder();
 		for (Marker ref : references) {
 			if (!Utils.isEmpty(name)) {
-				name += " ";
+				builder.append(" ");
 			}
-			name += ref.getName();
+			builder.append(ref.getName());
 		}
+		name = builder.toString();
 	}
 
 	public boolean hasChildren() {

@@ -15,10 +15,11 @@ import ch.qos.logback.core.spi.FilterReply;
  * marker attached to it, it will pass the filter. This is useful to route
  * security related events to a separate log file.
  * 
- * The default behavior of this filter is to deny all non-security events and 
- * pass security events to the rest of the filter chain. If acceptAll is true, 
- * then all security related events will pass this filter, regardless of other 
- * filters on the filter chain. To enable acceptAll, configure the filter as follows:
+ * The default behavior of this filter is to deny all non-security events and
+ * pass security events to the rest of the filter chain. If acceptAll is true,
+ * then all security related events will pass this filter, regardless of other
+ * filters on the filter chain. To enable acceptAll, configure the filter as
+ * follows:
  * 
  * <pre>
  * {@code
@@ -38,8 +39,8 @@ public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 		markersToMatch.add(SecurityMarkers.SECURITY_FAILURE);
 		markersToMatch.add(SecurityMarkers.SECURITY_AUDIT);
 	}
-        
-        private boolean acceptAll = false;
+
+	private boolean acceptAll = false;
 
 	public FilterReply decide(ILoggingEvent event) {
 		if (!isStarted()) {
@@ -71,7 +72,7 @@ public class SecurityMarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 		return FilterReply.DENY;
 	}
 
-        public void setAcceptAll(String input) {
+	public void setAcceptAll(String input) {
 		if (input != null) {
 			acceptAll = Boolean.valueOf(input);
 		}

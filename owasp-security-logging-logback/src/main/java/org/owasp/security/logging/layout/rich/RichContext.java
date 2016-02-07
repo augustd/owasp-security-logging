@@ -93,13 +93,13 @@ public class RichContext {
 		try {
 			InetAddress candidateAddress = null;
 			// Iterate all NICs (network interface cards)...
-			for (Enumeration<NetworkInterface> ifaces = NetworkInterface.getNetworkInterfaces(); ifaces
-					.hasMoreElements();) {
+			for (Enumeration<NetworkInterface> ifaces = NetworkInterface
+					.getNetworkInterfaces(); ifaces.hasMoreElements();) {
 				NetworkInterface iface = (NetworkInterface) ifaces
 						.nextElement();
 				// Iterate all IP addresses assigned to each card...
-				for (Enumeration<InetAddress> inetAddrs = iface.getInetAddresses(); inetAddrs
-						.hasMoreElements();) {
+				for (Enumeration<InetAddress> inetAddrs = iface
+						.getInetAddresses(); inetAddrs.hasMoreElements();) {
 					InetAddress inetAddr = (InetAddress) inetAddrs
 							.nextElement();
 					if (!inetAddr.isLoopbackAddress()) {

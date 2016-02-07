@@ -2,6 +2,7 @@
 
 [![Coverity Scan Status](https://scan.coverity.com/projects/3657/badge.svg)](https://scan.coverity.com/projects/3657)
 [![codecov.io](https://codecov.io/github/javabeanz/owasp-security-logging/coverage.svg?branch=master)](https://codecov.io/github/javabeanz/owasp-security-logging?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/56b7177df6e506003159ab58/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56b7177df6e506003159ab58)
 
 [![License][license-image]][license-url]
 [![Version][maven-version]][maven-url]

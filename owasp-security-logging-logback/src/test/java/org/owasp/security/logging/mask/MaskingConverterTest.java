@@ -49,59 +49,64 @@ import org.slf4j.LoggerFactory;
 @RunWith(MockitoJUnitRunner.class)
 public class MaskingConverterTest {
 
-    LoggerContext loggerContext = (LoggerContext)LoggerFactory.getILoggerFactory();
+	LoggerContext loggerContext = (LoggerContext) LoggerFactory
+			.getILoggerFactory();
 
-    Logger LOGGER = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-    
-    PatternLayoutEncoder encoder;
-    
-    @Mock
-    private RollingFileAppender<ILoggingEvent> mockAppender = new RollingFileAppender<ILoggingEvent>();
+	Logger LOGGER = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 
-    // Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
-    @Captor
-    private ArgumentCaptor<LoggingEvent> captorLoggingEvent;
+	PatternLayoutEncoder encoder;
 
-    @Before
-    public void setUp() {
-        PatternLayout.defaultConverterMap.put("mask", MaskingConverter.class.getName());
+	@Mock
+	private RollingFileAppender<ILoggingEvent> mockAppender = new RollingFileAppender<ILoggingEvent>();
 
-        encoder = new PatternLayoutEncoder();
-        encoder.setContext(loggerContext);
-        encoder.setPattern("%-4relative [%thread] %-5level %logger{35} - %mask%n");
-        encoder.start();
-        
-        mockAppender.setContext(loggerContext);
-        mockAppender.setEncoder(encoder);
-        mockAppender.start();
+	// Captor is genericised with ch.qos.logback.classic.spi.LoggingEvent
+	@Captor
+	private ArgumentCaptor<LoggingEvent> captorLoggingEvent;
 
-        LOGGER.addAppender(mockAppender);
-    }
+	@Before
+	public void setUp() {
+		PatternLayout.defaultConverterMap.put("mask",
+				MaskingConverter.class.getName());
 
-    @After
-    public void teardown() {
-        LOGGER.detachAppender(mockAppender);
-    }
+		encoder = new PatternLayoutEncoder();
+		encoder.setContext(loggerContext);
+		encoder.setPattern("%-4relative [%thread] %-5level %logger{35} - %mask%n");
+		encoder.start();
 
-    @Test
-    public void test() {
-        String userid = "myId";
-	String password = "secret";
-	LOGGER.info(SecurityMarkers.CONFIDENTIAL, "userid={}, password='{}'", userid, password);
+		mockAppender.setContext(loggerContext);
+		mockAppender.setEncoder(encoder);
+		mockAppender.start();
 
-        // Now verify our logging interactions
-        verify(mockAppender).doAppend(captorLoggingEvent.capture());
-        
-        // Get the logging event from the captor
-        final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+		LOGGER.addAppender(mockAppender);
+	}
 
-        // Check log level is correct
-        assertThat(loggingEvent.getLevel(), is(Level.INFO));
+	@After
+	public void teardown() {
+		LOGGER.detachAppender(mockAppender);
+	}
 
-        // Check the message being logged is correct 
-        String layoutMessage = encoder.getLayout().doLayout(loggingEvent);
-        assertTrue(layoutMessage.contains("userid=" + MaskingConverter.MASKED_PASSWORD + ", password='" + MaskingConverter.MASKED_PASSWORD + "'"));
-        assertFalse(layoutMessage.contains("secret"));
-    }
+	@Test
+	public void test() {
+		String userid = "myId";
+		String password = "secret";
+		LOGGER.info(SecurityMarkers.CONFIDENTIAL, "userid={}, password='{}'",
+				userid, password);
+
+		// Now verify our logging interactions
+		verify(mockAppender).doAppend(captorLoggingEvent.capture());
+
+		// Get the logging event from the captor
+		final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+
+		// Check log level is correct
+		assertThat(loggingEvent.getLevel(), is(Level.INFO));
+
+		// Check the message being logged is correct
+		String layoutMessage = encoder.getLayout().doLayout(loggingEvent);
+		assertTrue(layoutMessage.contains("userid="
+				+ MaskingConverter.MASKED_PASSWORD + ", password='"
+				+ MaskingConverter.MASKED_PASSWORD + "'"));
+		assertFalse(layoutMessage.contains("secret"));
+	}
 
 }

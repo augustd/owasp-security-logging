@@ -10,43 +10,45 @@ import org.slf4j.helpers.MessageFormatter;
 
 /**
  * This converter is used to output a masked version of the formatted message in
- * contexts where the logging of confidential information is undesirable. 
+ * contexts where the logging of confidential information is undesirable.
  *
- * It is not possible to replace the actual formatted message, instead this converter
- * returns a masked version of the message that can be accessed using the conversionWord
- * specified in the conversionRule definition in logback.xml. 
+ * It is not possible to replace the actual formatted message, instead this
+ * converter returns a masked version of the message that can be accessed using
+ * the conversionWord specified in the conversionRule definition in logback.xml.
  * 
  * @author August Detlefsen [augustd@codemagi.com]
- * @author Sytze van Koningsveld 
+ * @author Sytze van Koningsveld
  */
 public class MaskingConverter extends
-        ReplacingCompositeConverter<ILoggingEvent> {
+		ReplacingCompositeConverter<ILoggingEvent> {
 
-    public static final String MASKED_PASSWORD = "********";
+	public static final String MASKED_PASSWORD = "********";
 
 	@Override
-    public String convert(ILoggingEvent event) {
-        Marker eventMarker = event.getMarker();
+	public String convert(ILoggingEvent event) {
+		Marker eventMarker = event.getMarker();
 
-        Object[] args = event.getArgumentArray();
-        if (eventMarker != null && eventMarker.equals(SecurityMarkers.CONFIDENTIAL)) {            
-            for (int i = 0; i < args.length; i++) {
-                args[i] = MASKED_PASSWORD;
-            }
-        }
-        
-        String maskedMessage = MessageFormatter.arrayFormat(event.getMessage(), args).getMessage();
+		Object[] args = event.getArgumentArray();
+		if (eventMarker != null
+				&& eventMarker.equals(SecurityMarkers.CONFIDENTIAL)) {
+			for (int i = 0; i < args.length; i++) {
+				args[i] = MASKED_PASSWORD;
+			}
+		}
 
-        return maskedMessage;
-    }
+		String maskedMessage = MessageFormatter.arrayFormat(event.getMessage(),
+				args).getMessage();
 
-    /**
-     * Override start method because the superclass ReplacingCompositeConverter
-     * requires at least two options and this class has none.
-     */
-    @Override
-    public void start() {
-        started = true;
-    }
+		return maskedMessage;
+	}
+
+	/**
+	 * Override start method because the superclass ReplacingCompositeConverter
+	 * requires at least two options and this class has none.
+	 */
+	@Override
+	public void start() {
+		started = true;
+	}
 
 }

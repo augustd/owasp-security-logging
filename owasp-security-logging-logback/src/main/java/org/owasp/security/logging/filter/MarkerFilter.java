@@ -16,9 +16,9 @@ public class MarkerFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
 	Marker markerToMatch;
 
-        @Override
+	@Override
 	public void start() {
-		if (this.markerToMatch != null) {
+		if (markerToMatch != null) {
 			super.start();
 		} else {
 			addError(String.format("The marker property must be set for [%s]",
