@@ -41,7 +41,7 @@ public class MaskingRewritePolicy implements RewritePolicy {
 	 * @return The LogEvent after rewriting.
 	 */
 	public LogEvent rewrite(LogEvent source) {
-		// get the markers for the log event. If no markers, nothing cn be
+		// get the markers for the log event. If no markers, nothing can be
 		// tagged confidential and we can return
 		Marker sourceMarker = source.getMarker();
 		if (sourceMarker == null)
