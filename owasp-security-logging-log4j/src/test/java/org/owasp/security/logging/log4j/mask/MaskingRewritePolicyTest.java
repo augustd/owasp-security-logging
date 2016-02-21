@@ -56,11 +56,39 @@ public class MaskingRewritePolicyTest extends TestCase {
 		assertNotSame(event, result);
 	}
 
+	public void testRewriteNotConfidential() {
+		MaskingRewritePolicy fixture = new MaskingRewritePolicy();
+		Marker marker = new MarkerManager.Log4jMarker(
+				SecurityMarkers.EVENT_FAILURE_MARKER_NAME);
+		Message message = new ParameterizedMessage("ddd", "gladiator");
+		LogEvent event = createEvent(marker, message);
+		LogEvent result = fixture.rewrite(event);
+		assertEquals(event, result);
+	}
+
+	public void testRewriteConfidentialWithZeroParams() {
+		MaskingRewritePolicy fixture = new MaskingRewritePolicy();
+		Marker marker = new MarkerManager.Log4jMarker(
+				SecurityMarkers.CONFIDENTIAL.getName());
+		Message message = new ParameterizedMessage("ddd", null);
+		LogEvent event = createEvent(marker, message);
+		LogEvent result = fixture.rewrite(event);
+		assertEquals(event, result);
+	}
+
 	public void testRewriteConfidentialNoMessage() {
 		MaskingRewritePolicy fixture = new MaskingRewritePolicy();
 		Marker marker = new MarkerManager.Log4jMarker(
 				SecurityMarkers.CONFIDENTIAL.getName());
 		Log4jLogEvent event = createEvent(marker, null);
+		LogEvent result = fixture.rewrite(event);
+		assertEquals(event, result);
+	}
+
+	public void testRewriteNoMarker() {
+		MaskingRewritePolicy fixture = new MaskingRewritePolicy();
+		Message message = new ParameterizedMessage("ddd", "gladiator");
+		Log4jLogEvent event = createEvent(null, message);
 		LogEvent result = fixture.rewrite(event);
 		assertEquals(event, result);
 	}
