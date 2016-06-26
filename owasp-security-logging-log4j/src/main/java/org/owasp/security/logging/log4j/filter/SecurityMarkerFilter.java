@@ -48,8 +48,7 @@ public class SecurityMarkerFilter extends AbstractFilter {
 
 	static final Log4jMarkerFactory factory = new Log4jMarkerFactory();
 
-	public static final List<org.slf4j.Marker> markersToMatch = new ArrayList<org.slf4j.Marker>(
-			3);
+	public static final List<org.slf4j.Marker> markersToMatch = new ArrayList<org.slf4j.Marker>(3);
 
 	static {
 		markersToMatch.add(SecurityMarkers.SECURITY_SUCCESS);

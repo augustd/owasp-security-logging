@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="WARN" packages="org.owasp.security.logging.filter">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} %marker [%t] %-5level %logger{36} - %encode{%msg}%n"/>
+    </Console>
+    <Console name="SecureConsole" target="SYSTEM_OUT">
+      <PatternLayout pattern="SECURITY %d{HH:mm:ss.SSS} %marker [%t] %-5level %logger{36} - %encode{%msg}%n"/>
+      <Filters>
+          <SecurityMarkerFilter />
+      </Filters>
     </Console>
     <List name="List"></List>
   </Appenders>
   <Loggers>
     <Root level="debug">
       <AppenderRef ref="Console"/>
+      <AppenderRef ref="SecureConsole"/>
       <AppenderRef ref="List"/>
     </Root>
   </Loggers>
