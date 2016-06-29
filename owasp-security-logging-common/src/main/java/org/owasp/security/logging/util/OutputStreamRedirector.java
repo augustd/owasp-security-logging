@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 /**
  * 
  * @author Milton Smith
- * @see http://stackoverflow.com/questions/11187461/redirect-system-out-and-system-err-to-slf4j
+ * @see "http://stackoverflow.com/questions/11187461/redirect-system-out-and-system-err-to-slf4j"
  */
 public class OutputStreamRedirector extends OutputStream {
 

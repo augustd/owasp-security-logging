@@ -49,7 +49,6 @@ public class DefaultIntervalLoggerView implements IntervalLoggerView {
 	 * IntervalLoggerController wd = SecurityLoggingFactory.getControllerInstance();
 	 * // Add support for security markers
 	 * wd.setStatusMessageView( new DefaultIntervalLoggerView() {
-	 *   @Override
 	 *   public void logMessage( String message ) {
 	 *     logger.debug( SecurityMarkers.RESTRICTED, message );
 	 *   }
@@ -57,6 +56,7 @@ public class DefaultIntervalLoggerView implements IntervalLoggerView {
 	 * </code>
 	 * @param message Message to log.
 	 */
+        @Override
 	public void logMessage( String message ) {
 		
 		logger.info( message );
