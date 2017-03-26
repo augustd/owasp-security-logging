@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 /**
  * Various logging features to consider adding to your own programs.
@@ -37,6 +38,23 @@ public class SecurityUtil {
 	    // Enable autoflush
 	    System.setOut(new PrintStream(new OutputStreamRedirector(sysOutLogger, false), true));
 	    System.setErr(new PrintStream(new OutputStreamRedirector(sysErrLogger, true), true));
+	}
+	
+	/**
+	 * Redirect <code>System.out</code> and <code>System.err</code> streams to the given SLF4J loggers.
+	 * This is a benefit if you have a legacy console logger application.  Does not provide
+	 * benefit of a full implementation.  For example, no hierarchical or logger inheritence
+	 * support but there are some ancilarity benefits like, 1) capturing messages that would
+	 * otherwise be lost, 2) redirecting console messages to centralized log services, 3)
+	 * formatting console messages in other types of output (e.g., HTML).
+	 * 
+	 * @param sysOutLogger
+	 * @param sysErrLogger
+	 */
+	public static void bindSystemStreamsToSLF4J(Logger sysOutLogger, Logger sysErrLogger) {
+		SecurityUtil.sysOutLogger = sysOutLogger;
+		SecurityUtil.sysErrLogger = sysErrLogger;
+		bindSystemStreamsToSLF4J();
 	}
 	
 	/**
