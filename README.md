@@ -39,6 +39,7 @@ To use it with Log4j, add:
 
 Maven imports will automatically include the common classes. If using OWASP Security Logging on your classpath, you need to include security-logging-common-VERSION.jar in addition to the correct jar for either Logback or Log4j. 
 
+AppSec EU Rocks !
 ----
 
 [license-url]: https://github.com/javabeanz/owasp-security-logging/blob/master/LICENSE
