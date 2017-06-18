@@ -30,7 +30,7 @@ public class MaskingConverter extends
 
 		Object[] args = event.getArgumentArray();
 		if (eventMarker != null
-				&& eventMarker.equals(SecurityMarkers.CONFIDENTIAL)) {
+				&& eventMarker.contains(SecurityMarkers.CONFIDENTIAL)) {
 			for (int i = 0; i < args.length; i++) {
 				args[i] = MASKED_PASSWORD;
 			}
