@@ -41,6 +41,7 @@ import static org.mockito.Mockito.verify;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.owasp.security.logging.SecurityMarkers;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
 /**
  *
@@ -109,4 +110,28 @@ public class MaskingConverterTest {
 		assertFalse(layoutMessage.contains("secret"));
 	}
 
+    /**
+     * Test that masking works for combinations of markers and not just
+     * SecurityMarkers.CONFIDENTIAL
+     *
+     * @see https://github.com/javabeanz/owasp-security-logging/issues/19
+     */
+    @Test
+    public void markerTest() {
+        Marker multiMarker = SecurityMarkers.getMarker(SecurityMarkers.CONFIDENTIAL, SecurityMarkers.SECURITY_FAILURE);
+
+        String ssn = "123-45-6789";
+        LOGGER.info(multiMarker, "ssn={}", ssn);
+
+        // Now verify our logging interactions
+        verify(mockAppender).doAppend(captorLoggingEvent.capture());
+
+        // Get the logging event from the captor
+        final LoggingEvent loggingEvent = captorLoggingEvent.getValue();
+
+        // Check the message being logged is correct
+        String layoutMessage = encoder.getLayout().doLayout(loggingEvent);
+        assertTrue(layoutMessage.contains("ssn=" + MaskingConverter.MASKED_PASSWORD));
+    }
+        
 }

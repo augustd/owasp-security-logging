@@ -11,12 +11,16 @@
       </Filters>
     </Console>
     <List name="List"></List>
-  </Appenders>
-  <Loggers>
-    <Root level="debug">
+    <Rewrite name="MaskingRewritePolicy">
+      <MaskingRewritePolicy />
       <AppenderRef ref="Console"/>
       <AppenderRef ref="SecureConsole"/>
       <AppenderRef ref="List"/>
+    </Rewrite>
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="MaskingRewritePolicy"/>
     </Root>
   </Loggers>
 </Configuration>
