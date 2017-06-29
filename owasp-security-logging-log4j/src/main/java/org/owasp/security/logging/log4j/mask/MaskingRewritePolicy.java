@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.rewrite.RewritePolicy;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.message.ParameterizedMessage;
@@ -30,7 +31,12 @@ import org.owasp.security.logging.SecurityMarkers;
 @Plugin(name = "MaskingRewritePolicy", category = "Core", elementType = "rewritePolicy", printObject = true)
 public class MaskingRewritePolicy implements RewritePolicy {
 
-	private static final Object MASKED_PASSWORD = "********";
+	public static final Object MASKED_PASSWORD = "********";
+        
+    @PluginFactory
+    public static MaskingRewritePolicy createPolicy() {
+        return new MaskingRewritePolicy();
+    }
 
 	/**
 	 * Rewrite the event.
@@ -40,6 +46,7 @@ public class MaskingRewritePolicy implements RewritePolicy {
 	 *            logging event.
 	 * @return The LogEvent after rewriting.
 	 */
+        @Override
 	public LogEvent rewrite(LogEvent source) {
 		// get the markers for the log event. If no markers, nothing can be
 		// tagged confidential and we can return
