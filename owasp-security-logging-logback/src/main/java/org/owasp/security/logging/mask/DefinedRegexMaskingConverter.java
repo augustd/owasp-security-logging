@@ -10,8 +10,9 @@ import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 /**
  * Masking configured values in logs. To configure in you logback file here is an example:
- * Step 1 add conversion word
- * <conversionRule conversionWord="maskedMsg" converterClass="org.owasp.security.logging.mask.DefinedRegexMaskingConverter" />
+ * Step 1 add conversion word: 
+ * 
+ * &lt;conversionRule conversionWord="maskedMsg" converterClass="org.owasp.security.logging.mask.DefinedRegexMaskingConverter" /&gt;
  * 
  * Step 2 add to the pattern like this. There 4 pre-defined values for CompleteMask, MaskLastFour, MaskFirstFour, emailMasking
  * 
@@ -19,7 +20,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
  *			username,
  *			orderNumber|giftCardNum|,
  *			email
- *			}" />
+ *			}
  * 
  * @author Rahul Agarwal
  *
