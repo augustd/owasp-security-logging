@@ -4,7 +4,7 @@
   <!-- Top-level Parent POM -->
   <groupId>org.owasp</groupId>
   <artifactId>security-logging</artifactId>
-  <version>1.1.2</version>
+  <version>1.1.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>OWASP Security Logging</name>
   <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
@@ -103,6 +103,22 @@
           </execution>
         </executions>
       </plugin>
+	<plugin>
+            <groupId>com.buschmais.jqassistant.scm</groupId>
+            <artifactId>jqassistant-maven-plugin</artifactId>
+            <version>1.1.4</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>scan</goal>
+                        <goal>analyze</goal>
+                    </goals>
+                    <configuration>
+                        <failOnViolations>true</failOnViolations>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
   </build>
   <profiles>
