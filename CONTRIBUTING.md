@@ -1,1 +1,1 @@
-see https://github.com/javabeanz/owasp-security-logging/wiki/Contribution-guidelines
+see https://github.com/javabeanz/owasp-security-logging/wiki/Contributions,--Requests-and--Bug-Report-guidelines
