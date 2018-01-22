@@ -22,7 +22,7 @@ As of version 1.1.0 Logback and Log4j support are in separate projects. To use O
 <dependency>
   <groupId>org.owasp</groupId>
   <artifactId>security-logging-logback</artifactId>
-  <version>1.1.3</version>
+  <version>1.1.4</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ To use it with Log4j, add:
 <dependency>
   <groupId>org.owasp</groupId>
   <artifactId>security-logging-log4j</artifactId>
-  <version>1.1.3</version>
+  <version>1.1.4</version>
 </dependency>
 ```
 (Log4j users please see [Usage with Log4j](https://github.com/javabeanz/owasp-security-logging/wiki/Usage-with-Log4j))
