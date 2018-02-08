@@ -44,6 +44,6 @@ Maven imports will automatically include the common classes. If using OWASP Secu
 [license-url]: https://github.com/javabeanz/owasp-security-logging/blob/master/LICENSE
 [license-image]: https://img.shields.io/badge/license-apache%20v2-brightgreen.svg
 
-[maven-url]: http://search.maven.org/#browse|-1016717255
+[maven-url]: https://search.maven.org/#search%7Cga%7C1%7Cowasp%20security%20logging
 [maven-version]: https://img.shields.io/maven-central/v/org.owasp/security-logging.svg?style=flat
 
