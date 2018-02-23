@@ -25,6 +25,7 @@ As of version 1.1.0 Logback and Log4j support are in separate projects. To use O
   <version>1.1.4</version>
 </dependency>
 ```
+(Also see [Usage with Logback](https://github.com/javabeanz/owasp-security-logging/wiki/Usage-with-Logback))
 
 To use it with Log4j, add: 
 
@@ -46,4 +47,3 @@ Maven imports will automatically include the common classes. If using OWASP Secu
 
 [maven-url]: https://search.maven.org/#search%7Cga%7C1%7Cowasp%20security%20logging
 [maven-version]: https://img.shields.io/maven-central/v/org.owasp/security-logging.svg?style=flat
-
