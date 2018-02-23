@@ -4,6 +4,7 @@ before_install:
 after_success:
 - codecov
 jdk:
+- oraclejdk7
 - oraclejdk8
 env:
   global:
