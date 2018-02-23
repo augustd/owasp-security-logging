@@ -4,8 +4,8 @@ before_install:
 after_success:
 - codecov
 jdk:
-- oraclejdk7
 - oraclejdk8
+- oraclejdk9
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
