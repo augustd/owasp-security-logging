@@ -2,7 +2,6 @@
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/140/badge)](https://bestpractices.coreinfrastructure.org/projects/140)
 [![Coverity Scan Status](https://scan.coverity.com/projects/3657/badge.svg)](https://scan.coverity.com/projects/3657)
 [![codecov.io](https://codecov.io/github/javabeanz/owasp-security-logging/coverage.svg?branch=master)](https://codecov.io/github/javabeanz/owasp-security-logging?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/56b7177df6e506003159ab58/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56b7177df6e506003159ab58)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/4a192a53a1ed4dbd9ec6f029cba60af1)](https://www.codacy.com/app/java-development/owasp-security-logging)
 
 [![License][license-image]][license-url]
