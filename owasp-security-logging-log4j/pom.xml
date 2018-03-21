@@ -4,7 +4,7 @@
   <parent>
     <artifactId>security-logging</artifactId>
     <groupId>org.owasp</groupId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>security-logging-log4j</artifactId>
