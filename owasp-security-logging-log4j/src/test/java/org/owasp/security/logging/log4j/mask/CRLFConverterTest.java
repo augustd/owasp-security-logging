@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.pattern.EncodingPatternConverter;
-import org.apache.logging.log4j.junit.InitialLoggerContext;
+import org.apache.logging.log4j.junit.LoggerContextRule;
 import org.apache.logging.log4j.test.appender.ListAppender;
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Log4j already includes a converter to escape carriage returns and line feeds.
  * This test just verifies that it works as expected.
- * 
+ *
  * @author August Detlefsen [augustd@codemagi.com]
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -39,8 +39,7 @@ public class CRLFConverterTest {
 	private static final String CONFIG = "log4j2.xml";
 
 	@ClassRule
-	public static InitialLoggerContext context = new InitialLoggerContext(
-			CONFIG);
+	public static final LoggerContextRule context = new LoggerContextRule(CONFIG);
 
 	private static final org.slf4j.Logger LOGGER = LoggerFactory
 			.getLogger(CRLFConverterTest.class);

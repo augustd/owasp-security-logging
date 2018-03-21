@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.junit.InitialLoggerContext;
+import org.apache.logging.log4j.junit.LoggerContextRule;
 import org.apache.logging.log4j.test.appender.ListAppender;
 import org.junit.After;
 import org.junit.Before;
@@ -42,8 +42,7 @@ public class SecurityMarkerFilterTest {
 			.getLogger(SecurityMarkerFilterTest.class);
 
 	@ClassRule
-	public static InitialLoggerContext context = new InitialLoggerContext(
-			CONFIG);
+	public static LoggerContextRule context = new LoggerContextRule(CONFIG);
 
 	ListAppender appender;
 
