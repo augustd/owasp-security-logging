@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Log4j already includes a converter to escape carriage returns and line feeds.
  * This test just verifies that it works as expected.
- * 
+ *
  * @author August Detlefsen [augustd@codemagi.com]
  */
 @RunWith(MockitoJUnitRunner.class)

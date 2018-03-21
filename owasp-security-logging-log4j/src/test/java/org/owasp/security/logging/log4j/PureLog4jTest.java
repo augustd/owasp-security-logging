@@ -13,19 +13,12 @@
  */
 package org.owasp.security.logging.log4j;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.junit.LoggerContextRule;
 import org.apache.logging.log4j.test.appender.ListAppender;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.owasp.security.logging.SecurityMarkers;
-import org.owasp.security.logging.log4j.filter.ExcludeClassifiedMarkerFilter;
 
 /**
  *
@@ -62,7 +55,7 @@ public class PureLog4jTest {
 		LOGGER.error("Monster!");
 	}
 
-        /*
+	/*
 	@Test
 	public void testRaw() {
 		// create a new marker filter
@@ -133,6 +126,6 @@ public class PureLog4jTest {
 		LogEvent multiSecurityEvent = appender.getEvents().get(9);
 		assertEquals(Filter.Result.DENY, mkt.filter(multiSecurityEvent));
 	}
-        */
+	 */
 
 }
