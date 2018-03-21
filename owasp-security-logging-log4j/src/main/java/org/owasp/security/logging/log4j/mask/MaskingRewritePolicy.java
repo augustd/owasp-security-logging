@@ -75,14 +75,15 @@ public class MaskingRewritePolicy implements RewritePolicy {
 		for (int i = 0; i < params.length; i++) {
 			params[i] = MASKED_PASSWORD;
 		}
+		
+		// create new message
 		Message outMessage = new ParameterizedMessage(msg.getFormat(), params,
 				msg.getThrowable());
-		LogEvent output = new Log4jLogEvent(source.getLoggerName(),
-				source.getMarker(), source.getLoggerFqcn(), source.getLevel(),
-				outMessage, source.getThrown(), source.getContextMap(),
-				source.getContextStack(), source.getThreadName(),
-				source.getSource(), source.getTimeMillis());
 
+		// build new log event for output
+		LogEvent output = new Log4jLogEvent.Builder(source)
+				.setMessage(outMessage).build();
+		
 		return output;
 	}
 
