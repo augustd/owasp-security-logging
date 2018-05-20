@@ -72,4 +72,15 @@ public class Utils {
 		return (value == null || value.trim().length() == 0);
 	}
 
+	/**
+	 * Replace any carriage returns and line feeds with an underscore to prevent log injection attacks.
+	 *
+	 * @param value
+	 *            string to convert
+	 * @return converted string
+	 */
+	public static String replaceCRLFWithUnderscore(String value) {
+		return value.replace('\n', '_').replace('\r', '_');
+	}
+
 }
