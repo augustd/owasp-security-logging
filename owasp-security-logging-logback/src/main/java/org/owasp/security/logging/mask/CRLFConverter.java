@@ -2,6 +2,7 @@ package org.owasp.security.logging.mask;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.pattern.CompositeConverter;
+import org.owasp.security.logging.Utils;
 
 /**
  * This converter is used to encode any carriage returns and line feeds to
@@ -17,9 +18,7 @@ public class CRLFConverter extends CompositeConverter<ILoggingEvent> {
 
 	@Override
 	protected String transform(ILoggingEvent event, String in) {
-		String clean = in.replace('\n', '_').replace('\r', '_');
-
-		return clean;
+		return Utils.replaceCRLFWithUnderscore(in);
 	}
 
 	/**
