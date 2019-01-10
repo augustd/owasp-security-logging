@@ -8,5 +8,9 @@
 *.war
 *.ear
 
+# IntelliJ files
+.idea/
+*.iml
+
 byUser/access.log
 /.metadata
