@@ -104,9 +104,8 @@
         </executions>
       </plugin>
 	<plugin>
-            <groupId>com.buschmais.jqassistant.scm</groupId>
+            <groupId>com.buschmais.jqassistant</groupId>
             <artifactId>jqassistant-maven-plugin</artifactId>
-            <version>1.1.4</version>
             <executions>
                 <execution>
                     <goals>
