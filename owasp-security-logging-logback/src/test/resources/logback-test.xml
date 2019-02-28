@@ -2,10 +2,9 @@
 <configuration>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>STDOUT %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %crlf(%msg) %n
-            </Pattern>
-        </layout>
+        <encoder>
+            <pattern>STDOUT %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</pattern>
+        </encoder>
     </appender>
 
     <conversionRule conversionWord="crlf"
