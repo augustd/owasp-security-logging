@@ -3,13 +3,15 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>STDOUT %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</pattern>
+            <pattern>STDOUT %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %ex %n</pattern>
         </encoder>
     </appender>
 
     <conversionRule conversionWord="crlf"
-                    converterClass="org.owasp.security.logging.mask.CRLFConverter">
-    </conversionRule> />
+                    converterClass="org.owasp.security.logging.mask.CRLFConverter"/>
+
+    <conversionRule conversionWord="ex"
+                    converterClass="org.owasp.security.logging.mask.CRLFThrowableConverter"/>
 
     <conversionRule conversionWord="mask"
                         converterClass="org.owasp.security.logging.mask.MaskingConverter" />
@@ -20,7 +22,7 @@
     <!-- This appender represents a regular application log. -->
     <appender name="APP_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>APP %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%mask) %n</pattern>
+            <pattern>APP %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%mask) %ex %n</pattern>
         </encoder>
     </appender>
 
@@ -28,7 +30,7 @@
     <appender name="NOT_CLASSIFIED_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="org.owasp.security.logging.filter.ExcludeClassifiedMarkerFilter"/>
         <encoder>
-            <pattern>NOT CLASSIFIED %date [%thread] [%marker] %-5level - %msg %n</pattern>
+            <pattern>NOT CLASSIFIED %date [%thread] [%marker] %-5level - %msg %ex %n</pattern>
         </encoder>
     </appender>
     
@@ -51,7 +53,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>CONFIDENTIAL %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%msg) %n</pattern>
+            <pattern>CONFIDENTIAL %date [%thread] [%marker] %-5level U:%X{userId} - %crlf(%msg) %ex %n</pattern>
         </encoder>
     </appender>
     
