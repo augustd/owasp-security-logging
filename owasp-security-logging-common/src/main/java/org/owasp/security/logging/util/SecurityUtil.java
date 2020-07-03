@@ -50,9 +50,9 @@ public class SecurityUtil {
 	 * @param sysOutLogger
 	 * @param sysErrLogger
 	 */
-	public static void bindSystemStreamsToSLF4J(Logger sysOutLogger, Logger sysErrLogger) {
-		SecurityUtil.sysOutLogger = sysOutLogger;
-		SecurityUtil.sysErrLogger = sysErrLogger;
+	public static void bindSystemStreamsToSLF4J(Logger newSysOutLogger, Logger newSysErrLogger) {
+		if (newSysOutLogger != null) SecurityUtil.sysOutLogger = newSysOutLogger;
+		if (newSysErrLogger != null) SecurityUtil.sysErrLogger = newSysErrLogger;
 		bindSystemStreamsToSLF4J();
 	}
 	
