@@ -55,11 +55,17 @@
         </encoder>
     </appender>
     
-    <root level="INFO">
+    <logger name="BLANK" level="INFO">
+    </logger>
+    
+    <logger name="CONSOLE" level="INFO">
         <appender-ref ref="APP_CONSOLE" />
         <appender-ref ref="SECURITY_CONSOLE" />
         <appender-ref ref="CONFIDENTIAL_CONSOLE" />
         <appender-ref ref="NOT_CLASSIFIED_CONSOLE" />
+    </logger>
+    
+    <root level="INFO">
     </root>
     
 </configuration>    

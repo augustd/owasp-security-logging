@@ -82,7 +82,7 @@ public class CRLFConverterTest {
 		mockAppender.setEncoder(encoder);
 		mockAppender.start();
 
-		LOGGER = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+		LOGGER = (Logger) LoggerFactory.getLogger("CONSOLE");
 		LOGGER.addAppender(mockAppender);
 	}
 

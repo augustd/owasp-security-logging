@@ -53,7 +53,7 @@ public class MaskingConverterTest {
 	LoggerContext loggerContext = (LoggerContext) LoggerFactory
 			.getILoggerFactory();
 
-	Logger LOGGER = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+	Logger LOGGER = (Logger) LoggerFactory.getLogger("CONSOLE");
 
 	PatternLayoutEncoder encoder;
 
