@@ -1,11 +1,9 @@
 language: java
-before_install:
-- pip install --user codecov
-after_success:
-- codecov
 jdk:
 - openjdk8
 - openjdk11
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
