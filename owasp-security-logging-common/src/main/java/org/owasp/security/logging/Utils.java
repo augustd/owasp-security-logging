@@ -46,7 +46,7 @@ public class Utils {
 	/**
 	 * Converts an input byte array to a hex encoded String.
 	 *
-	 * @param input
+	 * @param hash
 	 *            Byte array to hex encode
 	 * @return Hex encoded String of the input byte array
 	 */
@@ -83,4 +83,7 @@ public class Utils {
 		return value.replace('\n', '_').replace('\r', '_');
 	}
 
+	public static String escapeAngleBrackets(String value) {
+		return value.replace("<","&lt;").replace(">", "&gt;");
+	}
 }

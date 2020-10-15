@@ -20,4 +20,9 @@ public class UtilsTest {
         Assert.assertEquals("hello__world", Utils.replaceCRLFWithUnderscore("hello\r\nworld"));
     }
 
+    @Test
+    public void shouldEscapeAngleBrackets() {
+        Assert.assertEquals("&lt;script&gt;", Utils.escapeAngleBrackets("<script>"));
+    }
+
 }
