@@ -83,4 +83,27 @@ public class Utils {
 		return value.replace('\n', '_').replace('\r', '_');
 	}
 
+	/**
+	 * Replace any NLF (newline function) with an underscore to prevent log injection attacks.
+	 *
+	 * @param value
+	 *            string to convert
+	 * @return converted string
+	 * @see https://unicode.org/versions/Unicode14.0.0/UnicodeStandard-14.0.pdf#page=235
+	 */
+	public static String escapeNLFChars(String value) {
+		return value.replace("\n", "\\n")
+			.replace("\r", "\\r")
+			// NEL
+			.replace("\u0085", "\\u0085")
+			// VT
+			.replace("\u000B", "\\u000B")
+			// FF
+			.replace("\u000C", "\\u000C")
+			// LS
+			.replace("\u2028", "\\u2028")
+			// PS
+			.replace("\u2029", "\\u2029");
+	}
+
 }
