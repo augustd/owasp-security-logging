@@ -106,15 +106,17 @@
 	<plugin>
             <groupId>com.buschmais.jqassistant</groupId>
             <artifactId>jqassistant-maven-plugin</artifactId>
-            <version>1.6.0</version>
+            <version>1.11.1</version>
             <executions>
                 <execution>
-                    <goals>
+                  <id>default-cli</id>
+                  <goals>
                         <goal>scan</goal>
                         <goal>analyze</goal>
                     </goals>
                     <configuration>
-                        <failOnViolations>true</failOnViolations>
+                      <warnOnSeverity>INFO</warnOnSeverity>
+                      <failOnSeverity>MAJOR</failOnSeverity>
                     </configuration>
                 </execution>
             </executions>
