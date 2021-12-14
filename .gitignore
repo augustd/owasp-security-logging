@@ -20,3 +20,4 @@ byUser/access.log
 /Servers/.settings
 /Servers
 /.idea/
+*.iml
