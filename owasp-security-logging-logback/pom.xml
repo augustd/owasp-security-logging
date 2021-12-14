@@ -82,21 +82,13 @@
 	  <plugin>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
-            <version>1.1.11</version>
+            <version>1.7.3</version>
             <executions>
               <execution>
-		  <configuration>
-			<targetClasses>
-			    <param>org.owasp.security.logging*</param>
-			</targetClasses>
-			<targetTests>
-			    <param>org.owasp.security.logging*</param>
-			</targetTests>
-		    </configuration>
-		    <goals>
-		    	<goal>mutationCoverage</goal>
-		    </goals>
-	       </execution>
+                <goals>
+                    <goal>mutationCoverage</goal>
+                </goals>
+              </execution>
             </executions>
         </plugin>
      </plugins>
