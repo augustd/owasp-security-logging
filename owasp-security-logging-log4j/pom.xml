@@ -84,9 +84,10 @@
           <version>1.7.3</version>
           <executions>
             <execution>
-                  <goals>
-                      <goal>mutationCoverage</goal>
-                  </goals>
+              <phase>test</phase>
+              <goals>
+                  <goal>mutationCoverage</goal>
+              </goals>
              </execution>
           </executions>
       </plugin>

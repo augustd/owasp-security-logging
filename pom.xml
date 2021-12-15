@@ -103,23 +103,24 @@
           </execution>
         </executions>
       </plugin>
-	<plugin>
-            <groupId>com.buschmais.jqassistant</groupId>
-            <artifactId>jqassistant-maven-plugin</artifactId>
-            <version>1.11.1</version>
-            <executions>
-                <execution>
-                  <id>default-cli</id>
-                  <goals>
-                        <goal>scan</goal>
-                        <goal>analyze</goal>
-                    </goals>
-                    <configuration>
-                      <warnOnSeverity>INFO</warnOnSeverity>
-                      <failOnSeverity>MAJOR</failOnSeverity>
-                    </configuration>
-                </execution>
-            </executions>
+	  <plugin>
+        <groupId>com.buschmais.jqassistant</groupId>
+        <artifactId>jqassistant-maven-plugin</artifactId>
+        <version>1.11.1</version>
+        <executions>
+            <execution>
+              <id>default-cli</id>
+              <phase>test</phase>
+              <goals>
+                    <goal>scan</goal>
+                    <goal>analyze</goal>
+                </goals>
+                <configuration>
+                  <warnOnSeverity>INFO</warnOnSeverity>
+                  <failOnSeverity>MAJOR</failOnSeverity>
+                </configuration>
+            </execution>
+        </executions>
         </plugin>
     </plugins>
   </build>
