@@ -7,7 +7,7 @@ import org.owasp.security.logging.Utils;
 /**
  * Throwable proxy that replaces CR/LF chars in the message to avoid log injection
  * in exception messages.
- * Calls to getMessage are intercepted to replace CR & LF in the message
+ * Calls to getMessage are intercepted to replace CR and LF in the message
  * Calls to getCause are intercepted to ensure all exceptions in the stack are treated
  * All other other methods are directly sent through the proxied instance.
  */

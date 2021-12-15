@@ -10,13 +10,15 @@ import java.util.regex.Pattern;
  * Masks social security numbers in log messages. SSNs consist of digits separated 
  * by dashes in the form <b>###-##-####</b>. 
  * 
- * The following famous/test SSNs are not masked: 
+ * The following famous/test SSNs are not masked:
+ * <ul>
  * <li>219-09-9999 (Social Security Board pamphlet)
  * <li>078-05-1120 (Woolworth wallets: Mrs. Hilda Schrader Whitcher)
  * <li>matches starting with 000 or 666
  * <li>matches containing 00 as the middle two digits
  * <li>matches containing 0000 as the final four digits
- * 
+ * </ul>
+ *
  * @author augustd
  */
 public class SSNMaskingConverter extends ClassicConverter {

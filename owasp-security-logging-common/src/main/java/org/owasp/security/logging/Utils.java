@@ -89,7 +89,7 @@ public class Utils {
 	 * @param value
 	 *            string to convert
 	 * @return converted string
-	 * @see https://unicode.org/versions/Unicode14.0.0/UnicodeStandard-14.0.pdf#page=235
+	 * @see <a href="https://unicode.org/versions/Unicode14.0.0/UnicodeStandard-14.0.pdf#page=235">Unicode Standard</a>
 	 */
 	public static String escapeNLFChars(String value) {
 		return value.replace("\n", "\\n")

@@ -42,13 +42,13 @@ public class SecurityUtil {
 	/**
 	 * Redirect <code>System.out</code> and <code>System.err</code> streams to the given SLF4J loggers.
 	 * This is a benefit if you have a legacy console logger application.  Does not provide
-	 * benefit of a full implementation.  For example, no hierarchical or logger inheritence
-	 * support but there are some ancilarity benefits like, 1) capturing messages that would
+	 * benefit of a full implementation.  For example, no hierarchical or logger inheritance
+	 * support but there are some ancillary benefits like, 1) capturing messages that would
 	 * otherwise be lost, 2) redirecting console messages to centralized log services, 3)
 	 * formatting console messages in other types of output (e.g., HTML).
 	 * 
-	 * @param sysOutLogger
-	 * @param sysErrLogger
+	 * @param newSysOutLogger Logger to use for System.out
+	 * @param newSysErrLogger Logger to use for System.err
 	 */
 	public static void bindSystemStreamsToSLF4J(Logger newSysOutLogger, Logger newSysErrLogger) {
 		if (newSysOutLogger != null) SecurityUtil.sysOutLogger = newSysOutLogger;
