@@ -30,6 +30,9 @@
     <developerConnection>scm:git:git@github.com:javabeanz/owasp-security-logging.git</developerConnection>
     <url>https://github.com/javabeanz/owasp-security-logging</url>
   </scm>
+  <properties>
+    <logback.version>1.2.8</logback.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.owasp</groupId>
@@ -59,12 +62,12 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.0</version>
+      <version>${logback.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
-      <version>1.2.0</version>
+      <version>${logback.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
