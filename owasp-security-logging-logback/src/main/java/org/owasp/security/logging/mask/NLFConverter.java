@@ -5,7 +5,7 @@ import ch.qos.logback.core.pattern.CompositeConverter;
 import org.owasp.security.logging.Utils;
 
 /**
- * This converter is used to encode any carriage returns and line feeds to
+ * This converter is used to encode any carriage returns, line feeds and backspaces to
  * prevent log injection attacks
  *
  * It is not possible to replace the actual formatted message, instead this
