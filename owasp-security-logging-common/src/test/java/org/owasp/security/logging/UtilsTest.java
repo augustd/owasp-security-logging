@@ -29,6 +29,7 @@ public class UtilsTest {
 		Assert.assertEquals("line0\\u000Cline1", Utils.escapeNLFChars("line0\u000Cline1"));
 		Assert.assertEquals("line0\\u2028line1", Utils.escapeNLFChars("line0\u2028line1"));
 		Assert.assertEquals("line0\\u2029line1", Utils.escapeNLFChars("line0\u2029line1"));
+		Assert.assertEquals("line0\\bline1", Utils.escapeNLFChars("line0\bline1"));
 	}
 
 }

@@ -46,7 +46,7 @@ public class Utils {
 	/**
 	 * Converts an input byte array to a hex encoded String.
 	 *
-	 * @param input
+	 * @param hash
 	 *            Byte array to hex encode
 	 * @return Hex encoded String of the input byte array
 	 */
@@ -84,7 +84,7 @@ public class Utils {
 	}
 
 	/**
-	 * Replace any NLF (newline function) with an underscore to prevent log injection attacks.
+	 * Escape any NLF (newline function) and Backspace to prevent log injection attacks.
 	 *
 	 * @param value
 	 *            string to convert
@@ -103,7 +103,8 @@ public class Utils {
 			// LS
 			.replace("\u2028", "\\u2028")
 			// PS
-			.replace("\u2029", "\\u2029");
+			.replace("\u2029", "\\u2029")
+			.replace("\b", "\\b");
 	}
 
 }
