@@ -20,7 +20,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import static org.mockito.Mockito.verify;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Marker;
 
 /**
