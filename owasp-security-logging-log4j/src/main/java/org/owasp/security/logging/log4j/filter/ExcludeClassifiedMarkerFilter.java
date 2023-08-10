@@ -26,7 +26,6 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
 import org.apache.logging.log4j.message.Message;
-import org.apache.logging.slf4j.Log4jMarker;
 import org.apache.logging.slf4j.Log4jMarkerFactory;
 import org.owasp.security.logging.SecurityMarkers;
 
@@ -94,8 +93,7 @@ public class ExcludeClassifiedMarkerFilter extends AbstractFilter {
 			return Result.NEUTRAL;
 		}
 
-		org.apache.logging.slf4j.Log4jMarker slf4jMarker = new Log4jMarker(
-				marker);
+		org.slf4j.Marker slf4jMarker = factory.getMarker(marker.getName());
 		for (org.slf4j.Marker matcher : markersToMatch) {
 			if (slf4jMarker.contains(matcher.getName())) {
 				return Result.DENY;

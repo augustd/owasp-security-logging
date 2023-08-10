@@ -21,7 +21,7 @@ import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.message.ParameterizedMessage;
-import org.apache.logging.slf4j.Log4jMarker;
+import org.apache.logging.slf4j.Log4jMarkerFactory;
 import org.owasp.security.logging.SecurityMarkers;
 
 /**
@@ -32,6 +32,8 @@ import org.owasp.security.logging.SecurityMarkers;
 public class MaskingRewritePolicy implements RewritePolicy {
 
 	public static final Object MASKED_PASSWORD = "********";
+	
+	static final Log4jMarkerFactory factory = new Log4jMarkerFactory();
 
 	@PluginFactory
 	public static MaskingRewritePolicy createPolicy() {
@@ -68,7 +70,7 @@ public class MaskingRewritePolicy implements RewritePolicy {
 
 		// check if this event is actually marked as confidential. If not,
 		// return
-		Log4jMarker eventMarker = new Log4jMarker(sourceMarker);
+		org.slf4j.Marker eventMarker = factory.getMarker(sourceMarker.getName());
 		if (!eventMarker.contains(SecurityMarkers.CONFIDENTIAL)) {
 			return source;
 		}
