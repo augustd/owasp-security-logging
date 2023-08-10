@@ -1,8 +1,7 @@
 package org.owasp.security.logging.layout.rich;
 
-import javax.servlet.ServletRequest;
-
 import ch.qos.logback.classic.helpers.MDCInsertingServletFilter;
+import jakarta.servlet.ServletRequest;
 
 public class RichMDCFilter extends MDCInsertingServletFilter {
 

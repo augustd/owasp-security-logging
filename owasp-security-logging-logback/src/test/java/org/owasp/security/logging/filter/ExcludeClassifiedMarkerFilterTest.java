@@ -185,27 +185,27 @@ public class ExcludeClassifiedMarkerFilterTest {
 
 		// test a logging event with the CONFIDENTIAL marker
 		LoggingEvent confidentialEvent = new LoggingEvent();
-		confidentialEvent.setMarker(SecurityMarkers.CONFIDENTIAL);
+		confidentialEvent.addMarker(SecurityMarkers.CONFIDENTIAL);
 		assertEquals(FilterReply.DENY, mkt.decide(confidentialEvent));
 
 		// test a logging event with the RESTRICTED marker
 		LoggingEvent restrictedEvent = new LoggingEvent();
-		restrictedEvent.setMarker(SecurityMarkers.RESTRICTED);
+		restrictedEvent.addMarker(SecurityMarkers.RESTRICTED);
 		assertEquals(FilterReply.DENY, mkt.decide(restrictedEvent));
 
 		// test a logging event with the SECRET marker
 		LoggingEvent secretEvent = new LoggingEvent();
-		secretEvent.setMarker(SecurityMarkers.SECRET);
+		secretEvent.addMarker(SecurityMarkers.SECRET);
 		assertEquals(FilterReply.DENY, mkt.decide(secretEvent));
 
 		// test a logging event with the TOP_SECRET marker
 		LoggingEvent topSecretEvent = new LoggingEvent();
-		topSecretEvent.setMarker(SecurityMarkers.TOP_SECRET);
+		topSecretEvent.addMarker(SecurityMarkers.TOP_SECRET);
 		assertEquals(FilterReply.DENY, mkt.decide(topSecretEvent));
 
 		// test a logging event without the CONFIDENTIAL marker
 		LoggingEvent normalEvent = new LoggingEvent();
-		normalEvent.setMarker(SecurityMarkers.EVENT_SUCCESS);
+		normalEvent.addMarker(SecurityMarkers.EVENT_SUCCESS);
 		assertEquals(FilterReply.NEUTRAL, mkt.decide(nulEvent));
 	}
 }

@@ -1,7 +1,7 @@
 package org.owasp.security.logging.mdc;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * This interface defines a plugin to the MDC filter. Applications can implement

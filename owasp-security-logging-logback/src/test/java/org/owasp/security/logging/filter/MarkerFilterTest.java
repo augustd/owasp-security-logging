@@ -34,12 +34,12 @@ public class MarkerFilterTest {
 
 		// test a logging event with the CONFIDENTIAL marker
 		LoggingEvent confidentialEvent = new LoggingEvent();
-		confidentialEvent.setMarker(SecurityMarkers.CONFIDENTIAL);
+		confidentialEvent.addMarker(SecurityMarkers.CONFIDENTIAL);
 		assertEquals(FilterReply.ACCEPT, mkt.decide(confidentialEvent));
 
 		// test a logging event without the CONFIDENTIAL marker
 		LoggingEvent normalEvent = new LoggingEvent();
-		normalEvent.setMarker(SecurityMarkers.EVENT_SUCCESS);
+		normalEvent.addMarker(SecurityMarkers.EVENT_SUCCESS);
 		assertEquals(FilterReply.DENY, mkt.decide(nulEvent));
 
 		Logger LOGGER = lc.getLogger(MarkerFilterTest.class);
