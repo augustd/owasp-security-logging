@@ -4,7 +4,7 @@
   <!-- Top-level Parent POM -->
   <groupId>org.owasp</groupId>
   <artifactId>security-logging</artifactId>
-  <version>1.2.0-develop</version>
+  <version>1.2.0</version>
   <packaging>pom</packaging>
   <name>OWASP Security Logging</name>
   <description>The OWASP Security Logging project provides developers and ops personnel with APIs for logging security-related events.</description>
