@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.owasp.security.logging.SecurityMarkers;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -174,17 +174,17 @@ public class SecurityMarkerFilterTest {
 
 		// test a logging event with the CONFIDENTIAL marker
 		LoggingEvent confidentialEvent = new LoggingEvent();
-		confidentialEvent.setMarker(SecurityMarkers.SECURITY_SUCCESS);
+		confidentialEvent.addMarker(SecurityMarkers.SECURITY_SUCCESS);
 		assertEquals(FilterReply.NEUTRAL, mkt.decide(confidentialEvent));
 
 		// test a logging event with the RESTRICTED marker
 		LoggingEvent restrictedEvent = new LoggingEvent();
-		restrictedEvent.setMarker(SecurityMarkers.SECURITY_FAILURE);
+		restrictedEvent.addMarker(SecurityMarkers.SECURITY_FAILURE);
 		assertEquals(FilterReply.NEUTRAL, mkt.decide(restrictedEvent));
 
 		// test a logging event with the SECRET marker
 		LoggingEvent secretEvent = new LoggingEvent();
-		secretEvent.setMarker(SecurityMarkers.SECURITY_AUDIT);
+		secretEvent.addMarker(SecurityMarkers.SECURITY_AUDIT);
 		assertEquals(FilterReply.NEUTRAL, mkt.decide(secretEvent));
 	}
 
@@ -204,17 +204,17 @@ public class SecurityMarkerFilterTest {
 
 		// test a logging event with the CONFIDENTIAL marker
 		LoggingEvent confidentialEvent = new LoggingEvent();
-		confidentialEvent.setMarker(SecurityMarkers.SECURITY_SUCCESS);
+		confidentialEvent.addMarker(SecurityMarkers.SECURITY_SUCCESS);
 		assertEquals(FilterReply.ACCEPT, mkt.decide(confidentialEvent));
 
 		// test a logging event with the RESTRICTED marker
 		LoggingEvent restrictedEvent = new LoggingEvent();
-		restrictedEvent.setMarker(SecurityMarkers.SECURITY_FAILURE);
+		restrictedEvent.addMarker(SecurityMarkers.SECURITY_FAILURE);
 		assertEquals(FilterReply.ACCEPT, mkt.decide(restrictedEvent));
 
 		// test a logging event with the SECRET marker
 		LoggingEvent secretEvent = new LoggingEvent();
-		secretEvent.setMarker(SecurityMarkers.SECURITY_AUDIT);
+		secretEvent.addMarker(SecurityMarkers.SECURITY_AUDIT);
 		assertEquals(FilterReply.ACCEPT, mkt.decide(secretEvent));
 	}
 

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>security-logging</artifactId>
     <groupId>org.owasp</groupId>
-    <version>1.1.7</version>
+    <version>1.2.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>security-logging-common</artifactId>
@@ -36,8 +36,8 @@
       <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
+      <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>

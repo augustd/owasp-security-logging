@@ -56,4 +56,9 @@ public class NLFThrowableProxy implements IThrowableProxy {
 	public IThrowableProxy[] getSuppressed() {
 		return proxied.getSuppressed();
 	}
+
+	@Override
+	public boolean isCyclic() {
+		return proxied.isCyclic();
+	}
 }

@@ -1,11 +1,11 @@
 package org.owasp.security.logging.mdc.plugins;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.http.HttpServletRequest;
-
 import org.owasp.security.logging.mdc.IPlugin;
 import org.owasp.security.logging.mdc.MDCFilter;
 import org.slf4j.MDC;
+
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * This plugin adds the request's remote IP address to the MDC in the most basic
