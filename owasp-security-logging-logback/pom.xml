@@ -31,7 +31,7 @@
     <url>https://github.com/javabeanz/owasp-security-logging</url>
   </scm>
   <properties>
-    <logback.version>1.4.9</logback.version>
+    <logback.version>1.4.12</logback.version>
   </properties>
   <dependencies>
     <dependency>
